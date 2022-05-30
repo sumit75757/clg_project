@@ -1,2 +1,2 @@
 [submodule "front-site"]
-	ignore = tracked
+	ignore = untracked
