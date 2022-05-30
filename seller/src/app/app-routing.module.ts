@@ -26,45 +26,45 @@ const routes: Routes = [
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
       {
-        path: 'theme',
+        path: 'orders',
         loadChildren: () =>
-          import('./views/theme/theme.module').then((m) => m.ThemeModule)
+          import('./views/product-orders/product-orders.module').then((m) => m.ProductOrdersModule)
       },
       {
-        path: 'base',
+        path: 'products',
         loadChildren: () =>
-          import('./views/base/base.module').then((m) => m.BaseModule)
+          import('./views/products/products.module').then((m) => m.ProductsModule)
       },
-      {
-        path: 'buttons',
-        loadChildren: () =>
-          import('./views/buttons/buttons.module').then((m) => m.ButtonsModule)
-      },
-      {
-        path: 'forms',
-        loadChildren: () =>
-          import('./views/forms/forms.module').then((m) => m.CoreUIFormsModule)
-      },
-      {
-        path: 'charts',
-        loadChildren: () =>
-          import('./views/charts/charts.module').then((m) => m.ChartsModule)
-      },
-      {
-        path: 'icons',
-        loadChildren: () =>
-          import('./views/icons/icons.module').then((m) => m.IconsModule)
-      },
-      {
-        path: 'notifications',
-        loadChildren: () =>
-          import('./views/notifications/notifications.module').then((m) => m.NotificationsModule)
-      },
-      {
-        path: 'widgets',
-        loadChildren: () =>
-          import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
-      },
+      // {
+      //   path: 'buttons',
+      //   loadChildren: () =>
+      //     import('./views/buttons/buttons.module').then((m) => m.ButtonsModule)
+      // },
+      // {
+      //   path: 'forms',
+      //   loadChildren: () =>
+      //     import('./views/forms/forms.module').then((m) => m.CoreUIFormsModule)
+      // },
+      // {
+      //   path: 'charts',
+      //   loadChildren: () =>
+      //     import('./views/charts/charts.module').then((m) => m.ChartsModule)
+      // },
+      // {
+      //   path: 'icons',
+      //   loadChildren: () =>
+      //     import('./views/icons/icons.module').then((m) => m.IconsModule)
+      // },
+      // {
+      //   path: 'notifications',
+      //   loadChildren: () =>
+      //     import('./views/notifications/notifications.module').then((m) => m.NotificationsModule)
+      // },
+      // {
+      //   path: 'widgets',
+      //   loadChildren: () =>
+      //     import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
+      // },
       {
         path: 'pages',
         loadChildren: () =>
@@ -100,7 +100,6 @@ const routes: Routes = [
       title: 'Register Page'
     }
   },
-  {path: '**', redirectTo: 'dashboard'}
 ];
 
 @NgModule({

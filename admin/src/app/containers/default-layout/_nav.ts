@@ -26,76 +26,80 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-pencil' }
   },
   {
-    name: 'Components',
+    name: 'Pages',
     title: true
   },
   {
-    name: 'Base',
-    url: '/base',
+    name: 'Users',
+    url: '/user',
     iconComponent: { name: 'cil-puzzle' },
-    children: [
-      {
-        name: 'Accordion',
-        url: '/base/accordion'
-      },
-      {
-        name: 'Breadcrumbs',
-        url: '/base/breadcrumbs'
-      },
-      {
-        name: 'Cards',
-        url: '/base/cards'
-      },
-      {
-        name: 'Carousel',
-        url: '/base/carousel'
-      },
-      {
-        name: 'Collapse',
-        url: '/base/collapse'
-      },
-      {
-        name: 'List Group',
-        url: '/base/list-group'
-      },
-      {
-        name: 'Navs & Tabs',
-        url: '/base/navs'
-      },
-      {
-        name: 'Pagination',
-        url: '/base/pagination'
-      },
-      {
-        name: 'Placeholder',
-        url: '/base/placeholder'
-      },
-      {
-        name: 'Popovers',
-        url: '/base/popovers'
-      },
-      {
-        name: 'Progress',
-        url: '/base/progress'
-      },
-      {
-        name: 'Spinners',
-        url: '/base/spinners'
-      },
-      {
-        name: 'Tables',
-        url: '/base/tables'
-      },
-      {
-        name: 'Tabs',
-        url: '/base/tabs'
-      },
-      {
-        name: 'Tooltips',
-        url: '/base/tooltips'
-      }
-    ]
   },
+  // {
+  //   name: 'Base',
+  //   url: '/base',
+  //   children: [
+  //     {
+  //       name: 'Accordion',
+  //       url: '/base/accordion'
+  //     },
+  //     {
+  //       name: 'Breadcrumbs',
+  //       url: '/base/breadcrumbs'
+  //     },
+  //     {
+  //       name: 'Cards',
+  //       url: '/base/cards'
+  //     },
+  //     {
+  //       name: 'Carousel',
+  //       url: '/base/carousel'
+  //     },
+  //     {
+  //       name: 'Collapse',
+  //       url: '/base/collapse'
+  //     },
+  //     {
+  //       name: 'List Group',
+  //       url: '/base/list-group'
+  //     },
+  //     {
+  //       name: 'Navs & Tabs',
+  //       url: '/base/navs'
+  //     },
+  //     {
+  //       name: 'Pagination',
+  //       url: '/base/pagination'
+  //     },
+  //     {
+  //       name: 'Placeholder',
+  //       url: '/base/placeholder'
+  //     },
+  //     {
+  //       name: 'Popovers',
+  //       url: '/base/popovers'
+  //     },
+  //     {
+  //       name: 'Progress',
+  //       url: '/base/progress'
+  //     },
+  //     {
+  //       name: 'Spinners',
+  //       url: '/base/spinners'
+  //     },
+  //     {
+  //       name: 'Tables',
+  //       url: '/base/tables'
+  //     },
+  //     {
+  //       name: 'Tabs',
+  //       url: '/base/tabs'
+  //     },
+  //     {
+  //       name: 'Tooltips',
+  //       url: '/base/tooltips'
+  //     }
+  //   ]
+  // },
   {
     name: 'Buttons',
     url: '/buttons',
