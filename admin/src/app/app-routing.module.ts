@@ -5,7 +5,8 @@ import { DefaultLayoutComponent } from './containers';
 import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
-import { RegisterComponent } from './views/pages/register/register.component';
+import { AuthGuardGuard } from './service/auth/auth-guard.guard';
+import { RouteGuardGuard } from './service/route/route-guard.guard';
 
 const routes: Routes = [
   {
@@ -16,6 +17,8 @@ const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate:[RouteGuardGuard],
+
     data: {
       title: 'Home'
     },
@@ -25,11 +28,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
-      // {
-      //   path: 'theme',
-      //   loadChildren: () =>
-      //     import('./views/theme/theme.module').then((m) => m.ThemeModule)
-      // },
+      {
+        path: 'service',
+        loadChildren: () =>
+          import('./views/userservice/service/service.module').then((m) => m.ServiceModule),
+         data: {
+           title: 'service'
+        },
+      },
       // {
       //   path: 'base',
       //   loadChildren: () =>
@@ -89,17 +95,12 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate:[AuthGuardGuard],
     data: {
       title: 'Login Page'
     }
   },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
-  },
+
 ];
 
 @NgModule({

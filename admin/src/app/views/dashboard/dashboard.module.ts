@@ -6,7 +6,6 @@ import { UsersComponent } from "../container/users/users.component";
 @NgModule({
   declarations: [
     DashboardComponent,
-    UsersComponent
   ],
   imports: [
     CommonModule
