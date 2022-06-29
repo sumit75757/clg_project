@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/service/api/api.service';
 import { ToastService } from 'src/app/theme/shared/components/toast/toast.service';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod'
 import Swal from 'sweetalert2';
 
 @Component({
