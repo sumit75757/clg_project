@@ -6,7 +6,7 @@ import '../../../../../../node_modules/tinymce/tinymce.min.js';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 import Swal from 'sweetalert2';
-import { environment } from 'src/environments/environment.js';
+import { environment } from 'src/environments/environment.prod';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
