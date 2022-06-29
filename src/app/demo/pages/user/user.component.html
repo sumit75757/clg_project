@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [hidHeader]="true" cardClass="user-profile-list">
+      <div class="mb-3" >
+      <input type="text" class="form-control" placeholder="Search..." [ngModel]="serch" (input)="Search($event)">
+      </div>
+      <div class="dt-responsive table-responsive">
+        <table datatable class="table table-striped row-border table-hover">
+          <thead style="width: 100%;">
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Age</th>
+              <th>City</th>
+              <th>Set State</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of tableData?.users">
+              <td>
+                <div class="d-inline-block align-middle">
+                  <img src="../../../../assets/images/user/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
+                    alt="user image" class="img-radius align-top m-r-15" style="width:40px;">
+                  <div class="d-inline-block">
+                    <h6 class="m-b-0">{{item.username}}</h6>
+                    <p class="m-b-0">{{item.email}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>{{item.phone}}</td>
+              <td>{{item.age}}</td>
+              <td>{{item.state}}</td>
+              <td>
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="{{item._id}}" checked="">
+                  <label class="custom-control-label" for="{{item._id}}"></label>
+                </div>
+              </td>
+              <td><span class="badge badge-light-success">Active</span></td>
+              <td>
+                <div class="">
+                  <button type="button" class="btn btn-icon btn-success m-1" (click)="update(item)"><i class="feather
+                    icon-edit"></i></button>
+                  <button type="button" class="btn btn-icon btn-danger" (click)="remove(item._id)"><i
+                      class="feather icon-trash-2"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <nav aria-label="Page navigation example">
+
+          <ul class="pagination justify-content-end  ">
+            <p class="pagination ">
+              <span class="page-item  ">
+                Total Users : {{tableData?.count}}
+
+              </span>
+            </p>
+            <li class="page-item   ">
+              <button class="page-link" href="#" (click)="previeus()">Previous</button>
+            </li>
+            <li class="page-item">
+              <button class="page-link"(click)="next()">Next</button>
+            </li>
+          </ul>
+        </nav> -->
+        <div>
+          <div class="footer">
+            <div>
+              <span class="page-item">
+                <p class="mb-0 px-3"> {{next+1}} - {{counts()}} of {{count}}
+                </p>
+              </span>
+            </div>
+            <div>
+              <ul class="pagination  ">
+                <li class="page-item   ">
+                  <button [disabled]="next==0" class="page-link" href="#" (click)="previeus()">Previous</button>
+                </li>
+                <li class="page-item">
+                  <button [disabled]="count == counts() || count <= 10" class="page-link" (click)="nexts()">Next</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>
