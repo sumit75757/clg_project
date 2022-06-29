@@ -1,10 +1,8 @@
 <div class="row">
   <div class="col-sm-12">
     <app-card [hidHeader]="true" cardClass="user-profile-list">
-      <div class="col-sm-6 text-left">
-        <h3 class="h3">Sellers </h3>
-      </div>
       <div class="row align-items-center m-l-0">
+
         <div class="col-sm-6"></div>
         <div class="col-sm-6 mb-3 text-right">
           <button class="btn btn-primary btn-round has-ripple" (click)="modalCustomer.show();clearForm()"><i
@@ -30,7 +28,7 @@
           </div>
           <div class="app-modal-footer">
             <button type="button" class="btn btn-danger m-1" data-dismiss="modal"
-              (click)="modalCustomer.hide()">Clear</button>
+              (click)="modalCustomer.hide();clearForm()">Clear</button>
             <button type="button" class="btn btn-primary"
               (click)="submit();modalCustomer.hide()">{{id?'Update':'submit'}}</button>
           </div>
@@ -41,10 +39,10 @@
           <div class="app-modal-header">
             <h5 class="modal-title">Add Seller</h5>
             <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
-              (click)="sub.hide()"><span aria-hidden="true">&times;</span></button>
+              (click)="sub.hide();clearForm()"><span aria-hidden="true">&times;</span></button>
           </div>
 
-          <div class="app-modal-body" [formGroup]="catogory">
+          <div class="app-modal-body" [formGroup]="subCatogory">
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
@@ -53,26 +51,21 @@
               </div>
               <div class="col-sm-12">
                 <div class="form-group">
-                  <select class="form-control">
-                    <option value="">Select Blood Group</option>
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
+                  <select class="form-control" formControlName="perent">
+                    <option value="">Select Category </option>
+                    <option *ngFor="let cat of tableData" value="{{cat._id}}">{{cat.name}}</option>
                   </select>
                 </div>
               </div>
             </div>
           </div>
-          <div class="app-modal-footer">
+          <div class="app-modal-footer ">
+             <button *ngIf="id" type="button"  class="btn btn-danger text-left delete"
+               (click)="subremove()">Delete</button>
             <button type="button" class="btn btn-danger m-1" data-dismiss="modal"
-              (click)="sub.hide()">Clear</button>
+              (click)="sub.hide();clearForm()">Clear</button>
             <button type="button" class="btn btn-primary"
-              (click)="submit();sub.hide()">{{id?'Update':'submit'}}</button>
+              (click)="submitSub();sub.hide();clearForm()">{{id?'Update':'submit'}}</button>
           </div>
         </app-ui-modal>
       </div>
@@ -86,7 +79,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of tableData" routerLink="{{'prodects/'+item._id}}">
+            <tr class="" *ngFor="let item of tableData">
               <!-- <td>
                 <div class="d-inline-block align-middle">
                   <img src="{{imageURL + item.userImage}}" alt="user image" class="img-radius align-top m-r-15"
@@ -98,12 +91,21 @@
                 </div>
               </td> -->
               <td>{{item.name}}</td>
-              <td>
-                <button *ngFor="let sub of item.subcaetogorys" class="btn btn-info btn-sm butt" type="button" style="color: #505e6c;background: rgba(0,0,0,0.1); padding: 5px 10px 5px 10px ;border-radius:
-                  60px;font-size: 11px;"> {{ sub.catgory}}</button>
+              <td class="mat-chip-list-wrapper ">
+                <div class="" *ngFor="let subcat of item.subcaetogorys | slice:0:number ;let i = index">
+                  <button (click)="sub.show();updateSub(subcat)" class="btn m-1 btn-info btn-sm butt" type="button"
+                    style="color: #505e6c;background: rgba(0,0,0,0.1); padding: 5px 10px 5px 10px ;border-radius: 60px;font-size: 11px;">
+                    {{i+1}}.{{ subcat.catgory}}</button>
+                </div>
                 <p *ngIf="item.subcaetogorys.length ==0">N/A</p>
+                <p *ngIf="item.subcaetogorys.length !=0 && item.subcaetogorys.length >= number" class="m-1"
+                  (click)="lodemor()">Lode
+                  more...</p>
+                <p *ngIf="number > 5 && item.subcaetogorys.length !=0" class="m-4" (click)="reset()">Reset...</p>
               </td>
+
               <td>
+
                 <div class="">
                   <button type="button" class="btn m-1 btn-sm btn-icon btn-success"
                     (click)="modalCustomer.show();update(item)"><i class="feather

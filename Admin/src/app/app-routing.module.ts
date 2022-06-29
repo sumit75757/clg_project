@@ -29,6 +29,10 @@ const routes: Routes = [
       {
         path: 'catogory',
         loadChildren: () => import('./demo/pages/catagory/catagory.module').then(module => module.CatagoryModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./demo/pages/user/user.module').then(module => module.UserModule)
       }
     ]
   },

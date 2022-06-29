@@ -271,7 +271,7 @@ export class ConfigurationComponent implements OnInit {
     document.querySelector('body').classList.remove('background-img-5');
     document.querySelector('body').classList.remove('background-img-6');
 
-    document.querySelector('body').classList.add(background);
+    document.querySelector('body').classList.add('background-img-4');
   }
 
 }

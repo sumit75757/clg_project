@@ -21,13 +21,13 @@ import { ConfigurationComponent } from './theme/layout/admin/configuration/confi
 
 import { ToggleFullScreenDirective } from './theme/shared/full-screen/toggle-full-screen';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
 /* Menu Items */
 import { NavigationItem } from './theme/layout/admin/navigation/navigation';
 import { NgbButtonsModule, NgbDropdownModule, NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from './service/login/api.service';
 import { HttpClientModule } from "@angular/common/http";
-
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +43,7 @@ import { HttpClientModule } from "@angular/common/http";
     NavSearchComponent,
     NavRightComponent,
     ConfigurationComponent,
-    ToggleFullScreenDirective
+    ToggleFullScreenDirective,
   ],
   imports: [
     BrowserModule,
@@ -55,10 +55,16 @@ import { HttpClientModule } from "@angular/common/http";
     NgbButtonsModule,
     NgbTabsetModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularEditorModule,
+    ToastrModule.forRoot()
 
   ],
-  providers: [NavigationItem,ApiService],
+  providers: [
+    NavigationItem,
+    ApiService,
+    { provide: ToastrService}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

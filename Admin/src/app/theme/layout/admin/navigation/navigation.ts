@@ -46,7 +46,15 @@ const NavigationItems = [
         type: 'item',
         url: '/seller',
         classes: 'nav-item',
-        icon: 'feather icon-users'
+        icon: 'feather icon-users',
+         children: [
+          {
+             id: 'product',
+            title: 'Product',
+            type: 'item',
+             url: '/seller/prodects/'
+          },
+        ]
       },
       {
         id: 'catogorys',
@@ -55,6 +63,14 @@ const NavigationItems = [
         url: '/catogory',
         classes: 'nav-item',
         icon: 'feather icon-grid'
+      },
+      {
+        id: 'users',
+        title: 'Users',
+        type: 'item',
+        url: '/users',
+        classes: 'nav-item',
+        icon: 'feather icon-user'
       },
 
     ]

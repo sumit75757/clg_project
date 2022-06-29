@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-sm-12">
     <app-card [hidHeader]="true" cardClass="user-profile-list">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Search..." (input)="Search($event)">
+      </div>
       <div class="col-sm-6 text-left">
         <h3 class="h3">Sellers </h3>
 
@@ -17,7 +20,7 @@
             <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
               (click)="modalCustomer.hide()"><span aria-hidden="true">&times;</span></button>
           </div>
-          <div class="app-modal-body" [formGroup]="product">
+          <div class="app-modal-body" [formGroup]="seller">
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
@@ -76,7 +79,7 @@
               <div class="col-sm-12">
                 <div class="form-group fill">
                   <label class="floating-label" for="Icon">Profie Image</label>
-                  <input type="file" class="form-control" (change)="fileHendler($event)" >
+                  <input type="file" class="form-control" (change)="fileHendler($event)">
                 </div>
               </div>
               <!-- <div class="col-sm-6">
@@ -120,6 +123,7 @@
               <th>City</th>
               <th>State</th>
               <th>Zender</th>
+              <th>Set Status</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -141,10 +145,16 @@
               <td>{{item.city}}</td>
               <td>{{item.zender}}</td>
               <td>
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="{{item._id}}" checked="">
+                  <label class="custom-control-label" for="{{item._id}}"></label>
+                </div>
+              </td>
+              <td>
                 <span class="badge badge-light-success">Active</span>
                 <div class="overlay-edit">
-                  <button type="button" class="btn btn-icon btn-success"
-                    (click)="modalCustomer.show();update(item)"><i class="feather
+                  <button type="button" class="btn btn-icon btn-success" (click)="modalCustomer.show();update(item)"><i
+                      class="feather
                     icon-edit"></i></button>
                   <button type="button" class="btn btn-icon btn-danger" (click)="remove(item._id)"><i
                       class="feather icon-trash-2"></i></button>
@@ -153,6 +163,27 @@
             </tr>
           </tbody>
         </table>
+        <div>
+          <div class="footer">
+            <div>
+              <span class="page-item">
+                <p class="mb-0 px-3"> {{next+1}} - {{counts()}} of {{count}}
+                </p>
+              </span>
+            </div>
+            <div>
+              <ul class="pagination  ">
+                <li class="page-item   ">
+                  <button [disabled]="next == 0" class="page-link" href="#" (click)="previeus()">Previous</button>
+                </li>
+                <li class="page-item">
+                  <button [disabled]="count == counts() || count <= 10" class="page-link"
+                    (click)="nexts()">Next</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </app-card>
   </div>

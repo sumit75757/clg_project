@@ -11,10 +11,13 @@
 table{
   border-radius: 5rem;
 }
-
-.login-dark {
-  height: 1000px;
-  // background: #475d62 url(star-sky.jpg);
-  background-size: cover;
-  position: relative;
+td{
+      max-width: 100%;
+}
+.mat-chip-list-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1.6rem;
 }

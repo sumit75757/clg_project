@@ -1,66 +1,89 @@
 <div class="row btn-page">
   <div class="col-sm-12">
     <app-card [hidHeader]="true" cardClass="card-datatable">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Search..." (input)="Search($event)">
+      </div>
       <div class="row align-items-center m-l-0">
         <div class="col-sm-6"></div>
         <div class="col-sm-6 text-right">
           <button class="btn btn-success btn-sm btn-round has-ripple" (click)="modalProduct.show()"><i
               class="feather icon-plus"></i> Add Product</button>
         </div>
-        <app-ui-modal #modalProduct>
+        <app-ui-modal #modalProduct [dialogClass]="'modal-xl'">
           <div class="app-modal-header">
             <h5 class="modal-title">Add Product</h5>
             <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
-              (click)="modalProduct.hide()"><span aria-hidden="true">&times;</span></button>
+              (click)="modalProduct.hide();reset()"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="app-modal-body">
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="Name" placeholder="Name">
+            <form [formGroup]="product">
+              <div class="row" *ngIf="!nextpage">
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" formControlName="productName" placeholder="Name">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" formControlName="productInfo"
+                      placeholder="Small Discrption">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <select class="form-control" formControlName="catogory" (change)="subcat($event)" id="Category">
+                      <option value="">Select Category</option>
+                      <option *ngFor="let cat of category" value="{{cat.name}}">{{cat.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <select class="form-control" formControlName="subCatogory" id="Category">
+                      <option value="">Select Category</option>
+                      <option *ngFor="let subcat of subcategory" value="{{subcat.catgory}}">{{subcat.catgory}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" formControlName="price" id="Price" placeholder="Price">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" formControlName="delevery" id="Quantity"
+                      placeholder="Quantity">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group fill">
+                    <input type="file" class="form-control" id="Icon" (change)="imageHandel($event)" multiple
+                      placeholder="Profile Image">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" formControlName="inStock" class="custom-control-input" id="customSwitch4"
+                      checked="">
+                    <label class="custom-control-label" for="customSwitch4">inStock</label>
+                  </div>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <select class="form-control" id="Category">
-                    <option value="">Select Category</option>
-                    <option value="1">Kids cloths</option>
-                    <option value="2">Man cloths</option>
-                    <option value="3">Man watch</option>
-                    <option value="3">Office Chairs</option>
-                    <option value="3">Travel bag</option>
-                    <option value="3">Woman cloath</option>
-                    <option value="3">Wooden Chairs</option>
-                  </select>
-                </div>
+              <div *ngIf="nextpage">
+                <angular-editor placeholder="Enter text here..." formControlName="discrption" [config]="editorConfig">
+                </angular-editor>
               </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="Price" placeholder="Price">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="Quantity" placeholder="Quantity">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group fill">
-                  <input type="file" class="form-control" id="Icon" placeholder="Profile Image">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="customSwitch4" checked="">
-                  <label class="custom-control-label" for="customSwitch4">Active</label>
-                </div>
-              </div>
-            </div>
+            </form>
           </div>
           <div class="app-modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal"
-              (click)="modalProduct.hide()">Clear</button>
-            <button type="button" class="btn btn-primary">Submit</button>
+              (click)="modalProduct.hide(); reset()">Clear</button>
+            <button type="button" class="btn btn-primary" (click)="next()">{{nextpage ? 'Previous' :'Next'}}</button>
+            <button type="button" *ngIf="nextpage" class="btn btn-primary"
+              (click)="addProduct()">{{productId ? 'Update' : 'Submit'}}</button>
           </div>
         </app-ui-modal>
       </div>
@@ -78,12 +101,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let item of items ">
               <td class="align-middle">
-                <img src="assets/images/product/prod-1.jpg" alt="contact-img" title="contact-img" class="rounded mr-3"
+                <img src="{{baseURL + item.productImage[0]}}" alt="contact-img" title="contact-img" class="rounded mr-3"
                   height="48" />
                 <p class="m-0 d-inline-block align-middle font-16">
-                  <a href="javascript:" class="text-body">Amazing Rolling Chair</a>
+                  <a href="javascript:" class="text-body">{{item.productName}}</a>
                   <br />
                   <span class="text-warning feather icon-star-on"></span>
                   <span class="text-warning feather icon-star-on"></span>
@@ -93,29 +116,53 @@
                 </p>
               </td>
               <td class="align-middle">
-                Office Chairs
+                {{item.catogory}}
               </td>
               <td class="align-middle">
                 16/12/2019
               </td>
               <td class="align-middle">
-                $597.66
+                {{item.price}}
               </td>
               <td class="align-middle">
-                654
+                {{item.delevery}}
               </td>
               <td class="align-middle">
                 <span class="badge badge-success">Active</span>
               </td>
 
               <td class="table-action">
-                <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
-                <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
-                <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+                <a href="javascript:" class="btn btn-icon btn-outline-primary" routerLink="{{'view/'+item._id}}"><i
+                    class="feather icon-eye"></i></a>
+                <a href="javascript:" class="btn btn-icon btn-outline-success"
+                  (click)="modalProduct.show();update(item)"><i class="feather icon-edit"></i></a>
+                <button href="javascript:" class="btn btn-icon btn-outline-danger" (click)="remove(item._id)"><i
+                    class="feather icon-trash-2"></i></button>
               </td>
             </tr>
           </tbody>
         </table>
+        <div>
+          <div class="footer">
+            <div>
+              <span class="page-item">
+                <p class="mb-0 px-3"> {{nexta+1}} - {{counts()}} of {{count}}
+                </p>
+              </span>
+            </div>
+            <div>
+              <ul class="pagination  ">
+                <li class="page-item   ">
+                  <button [disabled]="nexta==0" class="page-link" href="#" (click)="previeus()">Previous</button>
+                </li>
+                <li class="page-item">
+                  <button [disabled]="count == counts() || count <= 10" class="page-link"
+                    (click)="nexts()">Next</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </app-card>
   </div>

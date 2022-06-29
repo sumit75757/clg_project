@@ -30,7 +30,7 @@ export class AuthComponent implements OnInit {
         localStorage.setItem('token', res.token)
         localStorage.setItem("userData", res.useData)
         setTimeout(() => {
-          this.route.navigate(['/dashboard'])
+          this.route.navigate(['/'])
           this.spiner.hide()
         }, 200);
       })
