@@ -18,7 +18,6 @@ import { NavLeftComponent } from './theme/layout/admin/nav-bar/nav-left/nav-left
 import { NavSearchComponent } from './theme/layout/admin/nav-bar/nav-left/nav-search/nav-search.component';
 import { NavRightComponent } from './theme/layout/admin/nav-bar/nav-right/nav-right.component';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { ToggleFullScreenDirective } from './theme/shared/full-screen/toggle-full-screen';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -64,8 +63,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
   providers: [
     NavigationItem,
     ApiService,
-    { provide: ToastrService },
-    // { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: ToastrService}
   ],
   bootstrap: [AppComponent]
 })

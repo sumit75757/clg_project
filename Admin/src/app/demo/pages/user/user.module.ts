@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { UserComponent } from './user.component';
-import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
-  declarations: [UserComponent, CartComponent],
+  declarations: [UserComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
