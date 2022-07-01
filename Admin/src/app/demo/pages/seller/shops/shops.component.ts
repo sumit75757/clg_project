@@ -151,6 +151,7 @@ export class ShopsComponent implements OnInit {
     formdata.set('character', 'seller');
     formdata.append('userImage', this.file);
     if (this.id) {
+      formdata.delete('password');
       this.api.updateSeller(formdata, this.id).subscribe((res: any) => {
         if (res.response = 'success') {
           console.log(res);
@@ -185,7 +186,29 @@ export class ShopsComponent implements OnInit {
     this.spiner.hide()
 
   }
+  statusHandel(e) {
+    console.log(e.target.checked);
+    console.log(e.target.id);
 
+    let obj ={
+      satate: e.target.checked
+    }
+    this.api.updateSeller(obj, e.target.id).subscribe((res: any) => {
+      if (res.response = 'success') {
+        console.log(res);
+        this.spiner.hide()
+        this.toastr.success('Seller Update!')
+        this.getseller()
+        this.id = null
+
+      } else {
+        this.spiner.hide()
+        this.toastr.error('Somthing Wrong!')
+
+      }
+      this.id = null
+    })
+  }
 
   remove(id) {
     Swal.fire({

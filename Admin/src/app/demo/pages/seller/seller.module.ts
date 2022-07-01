@@ -8,14 +8,16 @@ import { ShopsComponent } from './shops/shops.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ViewComponent } from './view/view.component';
 import { ToastrModule } from 'ngx-toastr';
+import { PipePipe } from "../../../pipe/pipe.pipe";
 @NgModule({
-  declarations: [SellerComponent, ShopsComponent, ProductsComponent, ViewComponent],
+
+  declarations: [SellerComponent, ShopsComponent, ProductsComponent, ViewComponent, PipePipe],
   imports: [
     CommonModule,
     SellerRoutingModule,
     SharedModule,
     AngularEditorModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
   schemas: [  ]
 })

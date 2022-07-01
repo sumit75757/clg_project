@@ -8,7 +8,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment.prod';
 import { ToastrService } from 'ngx-toastr';
-
+import { PipePipe } from "../../../../pipe/pipe.pipe";
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',

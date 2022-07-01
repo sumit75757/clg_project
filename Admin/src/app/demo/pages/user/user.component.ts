@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/service/api/api.service';
 import { environment } from 'src/environments/environment.prod';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user',
@@ -69,8 +70,8 @@ export class UserComponent implements OnInit {
         if (this.serch != '' && res.users.length == 0) {
           this.toastr.error('Search result not found!')
         }
-        this.tableData = res
         this.count = res.count
+        this.tableData = res
         console.log(this.tableData.count);
         this.spiner.hide()
       } else {
@@ -84,11 +85,49 @@ export class UserComponent implements OnInit {
 
     })
   }
+  statusHandel(e) {
+    console.log(e.target.checked);
+    console.log(e.target.id);
+
+    let obj = {
+      satate: e.target.checked
+    }
+    this.api.updateSeller(obj, e.target.id).subscribe((res: any) => {
+      if (res.response = 'success') {
+        console.log(res);
+        this.spiner.hide()
+        this.toastr.success('Seller Update!')
+        this.getseller()
+        this.id = null
+
+      } else {
+        this.spiner.hide()
+        this.toastr.error('Somthing Wrong!')
+
+      }
+      this.id = null
+    })
+  }
   update(item) {
 
   }
   remove(id) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Once deleted, you will not be able to recover this imaginary file!',
+        type: 'warning',
+        showCloseButton: true,
+        showCancelButton: true
+      }).then((willDelete) => {
+        if (willDelete.dismiss) {
 
-  }
+        } else {
+          this.api.removeSeller(id).subscribe(res => {
+            this.toastr.success('Product has been deleted!!')
+            this.getseller()
+          })
+        }
+      });
+    }
 
 }
