@@ -1,0 +1,130 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [hidHeader]="true" cardClass="user-profile-list">
+      <div class="row align-items-center m-l-0">
+
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 mb-3 text-right">
+          <button class="btn btn-primary btn-round has-ripple" (click)="modalCustomer.show();clearForm()"><i
+              class="feather icon-plus"></i> Add Category</button>
+          <button class=" m-2 btn btn-primary btn-round has-ripple" (click)="sub.show();clearForm()"><i
+              class="feather icon-plus"></i> Add SubCategory</button>
+        </div>
+
+        <app-ui-modal #modalCustomer>
+          <div class="app-modal-header">
+            <h5 class="modal-title">Add Seller</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="modalCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body" [formGroup]="catogory">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="name" placeholder="Catogory Name" formControlName="name"
+                    [ngClass]="{'is-invalid': !this.catogory.controls['name'].valid&&
+                    this.catogory.controls['name'].touched}">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger m-1" data-dismiss="modal"
+              (click)="modalCustomer.hide();clearForm()">Clear</button>
+            <button type="button" class="btn btn-primary"
+              (click)="submit();modalCustomer.hide()">{{id?'Update':'submit'}}</button>
+          </div>
+        </app-ui-modal>
+
+
+        <app-ui-modal #sub>
+          <div class="app-modal-header">
+            <h5 class="modal-title">Add Seller</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="sub.hide();clearForm()"><span aria-hidden="true">&times;</span></button>
+          </div>
+
+          <div class="app-modal-body" [formGroup]="subCatogory">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Catogory Name" formControlName="name"
+                   [ngClass]="{'is-invalid': !this.subCatogory.controls['name'].valid&&
+                   this.subCatogory.controls['name'].touched}">
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <select class="form-control" formControlName="perent"
+                    [ngClass]="{'is-invalid': !this.subCatogory.controls['perent'].valid&&
+                   this.subCatogory.controls['perent'].touched}"
+                  >
+                    <option value="" >Select Category </option>
+                    <option *ngFor="let cat of tableData" value="{{cat._id}}">{{cat.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="app-modal-footer ">
+             <button *ngIf="id" type="button"  class="btn btn-danger text-left delete"
+               (click)="subremove()">Delete</button>
+            <button type="button" class="btn btn-danger m-1" data-dismiss="modal"
+              (click)="sub.hide();clearForm()">Clear</button>
+            <button type="button" class="btn btn-primary"
+              (click)="submitSub();sub.hide();clearForm()">{{id?'Update':'submit'}}</button>
+          </div>
+        </app-ui-modal>
+      </div>
+      <div class="dt-responsive table-responsive">
+        <table datatable class="table table-striped row-border table-hover">
+          <thead>
+            <tr>
+              <th>Category Name</th>
+              <th>Sub Category</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="" *ngFor="let item of tableData">
+              <!-- <td>
+                <div class="d-inline-block align-middle">
+                  <img src="{{imageURL + item.userImage}}" alt="user image" class="img-radius align-top m-r-15"
+                    style="width:40px;">
+                  <div class="d-inline-block">
+                    <h6 class="m-b-0">{{item.username}}</h6>
+                    <p class="m-b-0">{{item.email}}</p>
+                  </div>
+                </div>
+              </td> -->
+              <td>{{item.name}}</td>
+              <td class="mat-chip-list-wrapper ">
+                <div class="" *ngFor="let subcat of item.subcaetogorys | slice:0:number ;let i = index">
+                  <button (click)="sub.show();updateSub(subcat)" class="btn m-1 btn-info btn-sm butt" type="button"
+                    style="color: #505e6c;background: rgba(0,0,0,0.1); padding: 5px 10px 5px 10px ;border-radius: 60px;font-size: 11px;">
+                    {{i+1}}.{{ subcat.catgory}}</button>
+                </div>
+                <p *ngIf="item.subcaetogorys.length ==0">N/A</p>
+                <p *ngIf="item.subcaetogorys.length !=0 && item.subcaetogorys.length >= number" class="m-1"
+                  (click)="lodemor()">Lode
+                  more...</p>
+                <p *ngIf="number > 5 && item.subcaetogorys.length !=0" class="m-4" (click)="reset()">Reset...</p>
+              </td>
+
+              <td>
+
+                <div class="">
+                  <button type="button" class="btn m-1 btn-sm btn-icon btn-success"
+                    (click)="modalCustomer.show();update(item)"><i class="feather
+                    icon-edit"></i></button>
+                  <button type="button" class="btn  btn-sm btn-icon btn-danger" (click)="remove(item._id)"><i
+                      class="feather icon-trash-2"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>

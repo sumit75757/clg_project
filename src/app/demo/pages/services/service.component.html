@@ -1,0 +1,214 @@
+<div class="row btn-page">
+  <div class="col-sm-12">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+      <!-- <div class="mb-3">
+        <input type="text" class="form-control" [ngClass]="{'is-invalid': !this.serviceForm.controls['name'].valid&&
+                   this.serviceForm.controls['name'].touched}" placeholder="Search..." (input)="Search($event)">
+      </div> -->
+      <div class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="modalProduct.show()"><i
+              class="feather icon-plus"></i> Add Product</button>
+        </div>
+        <app-ui-modal #modalProduct [dialogClass]="'modal-xl'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Add Product</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="modalProduct.hide();reset()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <form [formGroup]="serviceForm">
+              <div class="row">
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control"
+                      [ngClass]="{'is-invalid': !this.serviceForm.controls['serviceName'].valid&&
+                   this.serviceForm.controls['serviceName'].touched}" formControlName="serviceName" placeholder="Service
+                   name">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <select class="form-control"
+                      [ngClass]="{'is-invalid': !this.serviceForm.controls['catogory'].valid&&
+                   this.serviceForm.controls['catogory'].touched}" formControlName="catogory" (change)="subcat($event)"
+                   id="Category">
+                      <option value="" selected>Select Category</option>
+                      <option *ngFor="let cat of category" value="{{cat.name}}">{{cat.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control"
+                      [ngClass]="{'is-invalid': !this.serviceForm.controls['serviceInfo'].valid&&
+                   this.serviceForm.controls['serviceInfo'].touched}" formControlName="serviceInfo"
+                      placeholder="Small Discrption">
+                  </div>
+                </div>
+                <!-- <div class="col-sm-6">
+                  <div class="form-group">
+                    <select class="form-control" [ngClass]="{'is-invalid': !this.serviceForm.controls['name'].valid&&
+                   this.serviceForm.controls['name'].touched}" formControlName="subCatogory" id="Category">
+                      <option value="">Select Category</option>
+                      <option *ngFor="let subcat of subcategory" value="{{subcat.catgory}}">{{subcat.catgory}}</option>
+                    </select>
+                  </div>
+                </div> -->
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control"
+                      [ngClass]="{'is-invalid': !this.serviceForm.controls['nearLandMark'].valid&&
+                   this.serviceForm.controls['nearLandMark'].touched}" formControlName="nearLandMark" id="nearLandMark"
+                      placeholder="Near Land Mark">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control"
+                      [ngClass]="{'is-invalid': !this.serviceForm.controls['area'].valid&&
+                   this.serviceForm.controls['area'].touched}" formControlName="area" id="area" placeholder="area">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <select class="form-control" [ngClass]="{'is-invalid': !this.serviceForm.controls['state'].valid&&
+                   this.serviceForm.controls['state'].touched}" formControlName="state" (change)="setState($event)"
+                   id="state">
+                      <option value="" selected>Select state</option>
+                      <option *ngFor="let cat of states" value="{{cat}}">{{cat}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                   <div class="form-group">
+                     <select class="form-control" [ngClass]="{'is-invalid': !this.serviceForm.controls['city'].valid}" formControlName="city" id="city">
+                       <option value="" selected >Select city</option>
+                       <option *ngFor="let cat of city" value="{{cat}}">{{cat}}</option>
+                     </select>
+                   </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input type="num" class="form-control"
+                      [ngClass]="{'is-invalid': !this.serviceForm.controls['pincode'].valid&&
+                   this.serviceForm.controls['pincode'].touched}" formControlName="pincode" id="pincode"
+                   placeholder="pincode">
+                  </div>
+                </div>
+
+                <!-- <div class="col-sm-6">
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" formControlName="inStock" class="custom-control-input" id="customSwitch4"
+                      checked="">
+                    <label class="custom-control-label" for="customSwitch4">inStock</label>
+                  </div>
+                </div> -->
+              </div>
+              <div class="row">
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="date">Open Time</label>
+                    <input type="time" id="date" class="form-control"
+                      [ngClass]="{'is-invalid': !this.serviceForm.controls['startTime'].valid&&
+                   this.serviceForm.controls['startTime'].touched}" formControlName="startTime" id="availabelTime"
+                    placeholder="Availabel Time" atp-time-picker>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="date">Close Time</label>
+                    <input type="time" id="date" class="form-control"
+                      [ngClass]="{'is-invalid': !this.serviceForm.controls['closeTime'].valid&&
+                   this.serviceForm.controls['closeTime'].touched}" formControlName="closeTime" id="availabelTime"
+                    placeholder="Availabel Time" atp-time-picker>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="file" class="form-control"  id="Icon" (change)="imageHandel($event)" multiple
+                    placeholder="Profile Image">
+                </div>
+              </div>
+              <div>
+                <angular-editor placeholder="Enter text here..." formControlName="discrption" [config]="editorConfig">
+                </angular-editor>
+              </div>
+            </form>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+              (click)="modalProduct.hide(); reset()">Clear</button>
+            <button type="button" class="btn btn-primary"
+              (click)="addService()">{{updateId ? 'Update' : 'Submit'}}</button>
+          </div>
+        </app-ui-modal>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-md-4" *ngFor="let item of items">
+          <app-card [customHeader]="true" headerClass="border-0 p-2 pb-0" [options]="false"
+            cardClass="user-card user-card-1" blockClass="pt-0 users-contact">
+            <div class="app-card-header">
+              <div class="cover-img-block">
+                <img
+                  src="{{imgURL + item.serviceImage[0]}}"
+                  alt="" class="img-fluid">
+              </div>
+            </div>
+            <div class="user-about-block text-center">
+              <div class="row align-items-end">
+                <div class="col text-left pb-3"><a href="javascript:" ><i
+                      class="icon feather icon-star text-c-yellow f-20"></i></a></div>
+                <div class="col" >
+                  <div class="position-relative d-inline-block">
+                    <img class="img-radius img-fluid wid-80" src="{{imgURL + item.seller.userImage}}" alt="User image">
+                  </div>
+                </div>
+                <div class="col text-right pb-3">
+                  <div class="dropdown" ngbDropdown>
+                    <a class="drp-icon dropdown-toggle text-secondary" ngbDropdownToggle data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"><i class="feather icon-more-horizontal"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                      <a class="dropdown-item" (click)="edit(item);modalProduct.show()" >Update</a>
+                      <a class="dropdown-item" (click)="deletee(item._id)">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <h6 class="mb-1 mt-3">{{item.seller.username}}</h6>
+              <p class="mb-3 text-muted">{{item.serviceName}}</p>
+              <p class="mb-1">{{item.serviceInfo}}</p>
+            </div>
+            <hr class="wid-80 b-wid-3 my-4">
+            <div class="row text-center">
+              <div class="col">
+                <h6 class="mb-1">{{item.startTime}}</h6>
+                <pre class="mb-0">Start Time</pre>
+              </div>
+              <div class="col">
+                <!-- <h6 class="mb-1">2749</h6> -->
+                <p class="mb-0">To</p>
+              </div>
+              <div class="col">
+                <h6 class="mb-1">{{item.closeTime}}</h6>
+                <pre class="mb-0">Close Time</pre>
+              </div>
+              <div class="col">
+                <h6 class="mb-1">678</h6>
+                <p class="mb-0">Following</p>
+              </div>
+            </div>
+          </app-card>
+        </div>
+
+      </div>
+    </app-card>
+  </div>
+</div>

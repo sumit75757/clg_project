@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [hidHeader]="false" cardClass="user-profile-list">
+      <div class="dt-responsive table-responsive">
+        <table datatable class="table table-striped row-border table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Office</th>
+              <th>Age</th>
+              <th>Start date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cart" >
+              <td>
+                <div class="d-inline-block align-middle">
+                  <img src="{{ imageUrl+  item.product.productImage[0]}} " alt="user image"
+                    class="img-radius align-top m-r-15"
+                    style="width:40px;">
+                  <div class="d-inline-block">
+                    <h6 class="m-b-0">{{item.product.productName}}</h6>
+                    <p class="m-b-0">{{item.product.productInfo  | srink }} </p>
+                  </div>
+                </div>
+              </td>
+              <td>Support Lead</td>
+              <td>Edinburgh</td>
+              <td>61</td>
+              <td>2011/04/25</td>
+              <td>
+                <span class="badge badge-light-success">Active</span>
+                <div class="overlay-edit">
+                  <button type="button" class="btn btn-icon btn-success"><i
+                      class="feather icon-check-circle"></i></button>
+                  <button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+
+          </tfoot>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>
