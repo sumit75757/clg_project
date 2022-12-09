@@ -5,6 +5,7 @@ import { RouteGuardGuard } from './service/route/route-guard.guard';
 import { SellerGuard } from "./service/sellerroute/seller.guard";
 import { AdminComponent } from './theme/layout/admin/admin.component';
 import {AuthComponent} from './theme/layout/auth/auth.component';
+import { SingupComponent } from './theme/layout/singup/singup.component';
 
 const routes: Routes = [
   {
@@ -51,8 +52,11 @@ const routes: Routes = [
     path: 'login',
     component: AuthComponent,
     canActivate: [AuthGuardGuard],
-
-
+  },
+  {
+    path: 'singup',
+    component: SingupComponent,
+    canActivate: [AuthGuardGuard],
   }
 ];
 

@@ -102,8 +102,7 @@ export class NavigationItem {
 
     let NavigationItems
     let userType: any = JSON.parse (localStorage.getItem('userData'))
-
-    if (userType.character === 'Admin') {
+    if (userType.character === 'admin') {
       NavigationItems = [
         {
           id: 'other',

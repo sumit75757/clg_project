@@ -1,0 +1,115 @@
+<div class="auth-wrapper align-items-stretch aut-bg-img">
+    <div class="flex-grow-1">
+      <div class="h-100 d-md-flex align-items-center auth-side-img">
+        <div class="col-sm-10 auth-content w-auto">
+          <img src="assets/pngegg.png" alt="" class="img-fluid">
+          <h1 class="text-white my-1">Welcome Back!</h1>
+          <h4 class="text-white font-weight-normal">Signin to your account </h4>
+        </div>
+      </div>
+      <div class="auth-side-form">
+
+        <form [formGroup]="seller">
+
+          <div class=" auth-content">
+            <img src="assets/images/auth/auth-logo-dark.png" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
+            <h3 class="mb-4 f-w-400">Signup</h3>
+
+              <div class="input-group mb-4">
+                <input type="text" class="form-control"
+                  [ngClass]="{'is-invalid': !this.seller.controls['username'].valid&&
+                 this.seller.controls['username'].touched}" placeholder="Name" formControlName="username" >
+              </div>
+
+              <div class="form-group fill">
+                <input type="email" class="form-control"
+                  [ngClass]="{'is-invalid': !this.seller.controls['email'].valid&&
+                 this.seller.controls['email'].touched}" placeholder="Email" formControlName="email">
+              </div>
+
+              <div class="form-group fill">
+                <input type="password" class="form-control"
+                  [ngClass]="{'is-invalid': !this.seller.controls['password'].valid&&
+                 this.seller.controls['password'].touched}" placeholder="Password" formControlName="password">
+              </div>
+
+              <div class="input-group mb-4">
+                <input type="text" class="form-control"
+                  [ngClass]="{'is-invalid': !this.seller.controls['phone'].valid&&
+                 this.seller.controls['phone'].touched}" placeholder="Phone" formControlName="phone">
+              </div>
+
+              <div class="input-group mb-4">
+                <input type="text" class="form-control" [ngClass]="{'is-invalid': !this.seller.controls['age'].valid&&
+                 this.seller.controls['age'].touched}" placeholder="Age" formControlName="age">
+              </div>
+
+              <div class="input-group mb-4">
+                <input type="text" class="form-control"
+                  [ngClass]="{'is-invalid': !this.seller.controls['address'].valid&&
+                 this.seller.controls['address'].touched}" placeholder="address" formControlName="address">
+              </div>
+
+              <div class="input-group mb-4">
+                <input type="text" class="form-control"
+                  [ngClass]="{'is-invalid': !this.seller.controls['city'].valid&&
+                 this.seller.controls['city'].touched}" placeholder="City" formControlName="city">
+              </div>
+
+              <div class="input-group mb-4">
+                <input type="text" class="form-control"
+                  [ngClass]="{'is-invalid': !this.seller.controls['state'].valid&&
+                 this.seller.controls['state'].touched}" placeholder="State" formControlName="state">
+              </div>
+
+              <div class="input-group mb-4">
+                <input type="text" class="form-control" [ngClass]="{'is-invalid': !this.seller.controls['zip'].valid&&
+                 this.seller.controls['zip'].touched}" placeholder="Zip" formControlName="zip">
+              </div>
+
+              <div class="input-group mb-4">
+                <select class="form-control" placeholder="zender" [ngClass]="{'is-invalid': !this.seller.controls['zender'].valid&&
+                 this.seller.controls['zender'].touched}" formControlName="zender">
+                  <option value="" selected > Select zender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+
+              <div class="form-group fill">
+                <label class="floating-label" for="Icon">Profie Image</label>
+                <input type="file" class="form-control"
+                  [ngClass]="{'is-invalid': !this.seller.controls['userImage'].valid && !file}"
+                  (change)="fileHendler($event)">
+              </div>
+            <!--
+              <div class="form-group fill">
+                <label class="floating-label" for="Birth">Birth Date</label>
+                <input type="date" class="form-control"  [ngClass]="{'is-invalid': !this.seller.controls['perent'].valid&&
+                 this.seller.controls['perent'].touched}" id="Birth" placeholder="123">
+              </div>
+            </div> -->
+            <!--
+              <div class="input-group mb-4">
+                <select class="form-control"  [ngClass]="{'is-invalid': !this.seller.controls['perent'].valid&&
+                 this.seller.controls['perent'].touched}">
+                  <option value="">Select Blood Group</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                </select>
+              </div>
+            </div> -->
+          </div>
+
+            <button class="btn btn-block btn-primary mb-0" (click)="submit()">Signup</button>
+
+        </form>
+      </div>
+    </div>
+  </div>

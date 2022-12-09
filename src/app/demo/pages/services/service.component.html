@@ -115,7 +115,7 @@
                     <input type="time" id="date" class="form-control"
                       [ngClass]="{'is-invalid': !this.serviceForm.controls['startTime'].valid&&
                    this.serviceForm.controls['startTime'].touched}" formControlName="startTime" id="availabelTime"
-                    placeholder="Availabel Time" atp-time-picker>
+                    placeholder="Availabel Time" style="z-index: 10000000000000 !important;" atp-time-picker>
                   </div>
                 </div>
                 <div class="col-sm-6">
@@ -124,7 +124,7 @@
                     <input type="time" id="date" class="form-control"
                       [ngClass]="{'is-invalid': !this.serviceForm.controls['closeTime'].valid&&
                    this.serviceForm.controls['closeTime'].touched}" formControlName="closeTime" id="availabelTime"
-                    placeholder="Availabel Time" atp-time-picker>
+                    placeholder="Availabel Time" style="z-index: 10000000000000 !important;" atp-time-picker>
                   </div>
                 </div>
               </div>

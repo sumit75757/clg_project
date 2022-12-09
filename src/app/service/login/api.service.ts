@@ -10,5 +10,8 @@ export class ApiService {
   adminLogin(data:any){
     return this.http.post(this.url+"api/auth/singin",data)
   }
+  addSeller(data:any) {
+    return this.http.post(this.url + 'api/auth/singup', data)
+  }
 
 }

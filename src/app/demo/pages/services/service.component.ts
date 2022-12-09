@@ -85,9 +85,7 @@ export class ServiceComponent implements OnInit {
   }
   sta:any
   ngOnInit() {
-    this.activeRoute.params.subscribe(params => {
-      this.sellerID = params.id
-    })
+    this.sellerID = JSON.parse(localStorage.getItem("userData"))._id
     this.api.getState().subscribe((res: any) => {
       // for (let index = 0; index < 34; index++) {
       //   const element = array[index];
@@ -193,7 +191,7 @@ export class ServiceComponent implements OnInit {
     let formdata = new FormData()
     formdata.set('serviceName', this.serviceForm.controls['serviceName'].value)
     formdata.set('serviceInfo', this.serviceForm.controls['serviceInfo'].value)
-    formdata.set('sellerId', "62b0971fb7478deba4c1f7bb")
+    formdata.set('sellerId', this.sellerID)
     formdata.set('catogory', this.serviceForm.controls['catogory'].value)
     formdata.set('nearLandMark', this.serviceForm.controls['nearLandMark'].value)
     formdata.set('area', this.serviceForm.controls['area'].value)
@@ -203,6 +201,7 @@ export class ServiceComponent implements OnInit {
     formdata.set('startTime', this.serviceForm.controls['startTime'].value)
     formdata.set('closeTime', this.serviceForm.controls['closeTime'].value)
     formdata.set('discrption', this.serviceForm.controls['discrption'].value)
+debugger
     if (this.files) {
       for (let index = 0; index < this.files.length; index++) {
         const element = this.files[index];

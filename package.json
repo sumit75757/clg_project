@@ -72,6 +72,7 @@
     "ngx-toastr": "^9.1.0",
     "nouislider": "^14.0.1",
     "peity": "^3.3.0",
+    "pug": "^3.0.2",
     "rxjs": "~6.5.4",
     "rxjs-compat": "^6.5.4",
     "screenfull": "^4.2.0",
