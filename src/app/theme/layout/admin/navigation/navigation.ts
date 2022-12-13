@@ -175,7 +175,7 @@ export class NavigationItem {
       NavigationItems = [
         {
           id: 'other',
-          title: 'Admin',
+          title: 'Seller',
           type: 'group',
           icon: 'feather icon-align-left',
           children: [

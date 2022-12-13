@@ -14,31 +14,32 @@ import { NgxSpinnerService } from "ngx-spinner";
   providedIn: "root",
 })
 export class InterceptorService {
-
   token: any;
-    skipInterceptor = false;
-    constructor(private router: Router,private toastr: ToastrService, public spiner: NgxSpinnerService) {}
+  skipInterceptor = false;
+  constructor(
+    private router: Router,
+    private toast: ToastrService,
+    public spiner: NgxSpinnerService
+  ) {}
 
-    intercept(
-      req: HttpRequest<any>,
-      next: HttpHandler
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status == 401 && error.statusText == "Unauthorized") {
-
-          this.spiner.show()
-          localStorage.removeItem("token")
-          localStorage.removeItem("userData")
-          this.router.navigate(["/login"])
-          this.toastr.error('Somthing Wrong! ',"Unauthorized 401")
+          this.spiner.show();
+          localStorage.removeItem("token");
+          localStorage.removeItem("userData");
+          this.router.navigate(["/login"]);
+          // this.toast.error('Somthing Wrong! ',"Unauthorized 401")
           setTimeout(() => {
-
-            this.spiner.hide()
+            this.spiner.hide();
           }, 600);
         } else {
-
         }
+        this.toast.error(error.statusText);
         console.log(error);
         let err = error;
         return Observable.throw(error);
