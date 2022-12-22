@@ -12,6 +12,7 @@ export class AuthGuardGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let authToken = localStorage.getItem('token')
 
+
     if (authToken && authToken != "") {
       this.route.navigate(['']);
       // this.service.sinup = true
