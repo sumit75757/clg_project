@@ -93,6 +93,7 @@
                 <div class="form-group fill">
                   <label class="floating-label" for="Icon">Profie Image</label>
                   <input type="file" class="form-control"
+                  formControlName="userImage"
                     [ngClass]="{'is-invalid': !this.seller.controls['userImage'].valid && !file}"
                     (change)="fileHendler($event)">
                 </div>
@@ -124,7 +125,7 @@
           </div>
           <div class="app-modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal"
-              (click)="modalCustomer.hide()">Clear</button>
+              (click)="modalCustomer.hide();clearForm()">Clear</button>
             <button type="button" class="btn btn-primary my-3"
               (click)="submit();modalCustomer.hide()">{{id?'Update':'submit'}}</button>
           </div>

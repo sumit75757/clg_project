@@ -90,7 +90,6 @@ export class ProductsComponent implements OnInit {
     this.product = this.fb.group({
       productName: new FormControl("", [Validators.required]),
       productInfo: new FormControl("", [Validators.required]),
-      sellerId: new FormControl(this.id, [Validators.required]),
       price: new FormControl("", [Validators.required]),
       catogory: new FormControl("", [Validators.required]),
       inStock: new FormControl("", [Validators.required]),
@@ -146,6 +145,14 @@ export class ProductsComponent implements OnInit {
       }
     })
 
+  }
+  statusHandel(e:any){
+
+    this.api.updateproduct({sethomepage:e.target.checked},e.target.id).subscribe(res => {
+      this.toastr.success('Product Update!')
+      this.getproducta()
+      console.log(res);
+    })
   }
 
   Search(e) {

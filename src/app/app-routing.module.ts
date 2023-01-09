@@ -42,10 +42,6 @@ const routes: Routes = [
         path: 'service',
         loadChildren: () => import('./demo/pages/services/services.module').then(module => module.ServicesModule)
       },
-        // {
-        //   path: 'service',
-        //   loadChildren: () => import('./demo/pages/user/user.module').then(module => module.UserModule)
-        // }
     ]
   },
   {

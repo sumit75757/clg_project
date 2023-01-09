@@ -41,7 +41,7 @@ export class ShopsComponent implements OnInit {
       age: new FormControl("", [Validators.required]),
       zender: new FormControl("", [Validators.required]),
       character: new FormControl("", [Validators.required]),
-      userImage: new FormControl(this.file),
+      userImage: new FormControl("", [Validators.required]),
 
     })
     this.getseller()
@@ -79,7 +79,6 @@ export class ShopsComponent implements OnInit {
     }
   }
   fileHendler(e: any) {
-    debugger
     let file = e.target.files[0]
     this.file = file
     this.seller.controls['userImage'].setValue(this.file)
@@ -129,9 +128,7 @@ export class ShopsComponent implements OnInit {
   }
 
   clearForm() {
-
     this.id = null
-    console.log(this.id);
     this.seller.reset()
     this.seller.controls['email'].enable()
     this.seller.controls['password'].enable()

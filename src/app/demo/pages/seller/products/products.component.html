@@ -109,6 +109,8 @@
               <th>Added Date</th>
               <th>Price</th>
               <th>Quantity</th>
+              <th>Show At Home</th>
+
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -140,9 +142,15 @@
               <td class="align-middle">
                 {{item.delevery}}
               </td>
+              <td>
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="{{item._id}}" (change)="statusHandel($event)"
+                    [checked]="item.onhome">
+                  <label class="custom-control-label" for="{{item._id}}"></label>
+                </div>
+              </td>
               <td class="align-middle">
                 <span class="badge badge-success">Active</span>
-
               </td>
 
               <td class="table-action">
