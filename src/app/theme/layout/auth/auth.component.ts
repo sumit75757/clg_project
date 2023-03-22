@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 import { ApiService } from 'src/app/service/login/api.service';
 
@@ -12,7 +13,7 @@ import { ApiService } from 'src/app/service/login/api.service';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private api: ApiService, private route: Router, public spiner: NgxSpinnerService,) {
+  constructor(private fb: FormBuilder, private api: ApiService, private route: Router, public spiner: NgxSpinnerService,private toster :ToastrService) {
   }
   loginform: FormGroup ;
 
@@ -28,14 +29,14 @@ export class AuthComponent implements OnInit {
     if (this.loginform.valid) {
       this.api.adminLogin(this.loginform.value).subscribe((res: any) => {
         localStorage.setItem('token', res.token)
-        localStorage.setItem("userData", res.useData)
+        localStorage.setItem("userData", JSON.stringify(res.useData))
         setTimeout(() => {
           this.route.navigate(['/'])
           this.spiner.hide()
         }, 200);
       })
     } else {
-      this.spiner.show()
+      this.spiner.hide()
     }
 
   }

@@ -6,3 +6,7 @@
   align-items: baseline !important;
   font-size: 1rem !important;
 }
+
+::ng-deep #toast-container > div {
+    opacity: 1 !important;
+}

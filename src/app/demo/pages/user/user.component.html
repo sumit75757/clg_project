@@ -9,9 +9,7 @@
           <thead style="width: 100%;">
             <tr>
               <th>Name</th>
-              <th>Phone</th>
-              <th>Age</th>
-              <th>City</th>
+              <th>Cart</th>
               <th>Set State</th>
               <th>Status</th>
               <th>Action</th>
@@ -29,10 +27,8 @@
                   </div>
                 </div>
               </td>
-              <td>{{item.phone}}</td>
-              <td>{{item.age}}</td>
+
               <td><a class="btn btn-link" routerLink="{{'cart/'+item._id}}"> Cart</a> </td>
-              <td>{{item.state}}</td>
               <td>
                 <div class="custom-control custom-switch">
                   <input type="checkbox" class="custom-control-input" id="{{item._id}}" (change)="statusHandel($event)"

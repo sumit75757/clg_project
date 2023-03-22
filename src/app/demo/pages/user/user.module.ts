@@ -5,14 +5,18 @@ import { UserRoutingModule } from './user-routing.module';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { UserComponent } from './user.component';
 import { CartComponent } from './cart/cart.component';
+import { ToastrModule } from 'ngx-toastr';
+import { SrinkPipe } from 'src/app/pipe/srink.pipe';
 
 
 @NgModule({
-  declarations: [UserComponent, CartComponent],
+  declarations: [UserComponent, CartComponent, SrinkPipe],
   imports: [
     CommonModule,
     UserRoutingModule,
-    SharedModule
+    SharedModule,
+     ToastrModule.forRoot(),
+
   ],
   schemas: []
 })

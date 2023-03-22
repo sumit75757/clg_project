@@ -5,7 +5,7 @@
         <div class="col-lg-5">
           <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item " *ngFor="let img of product.productImage; let i = index"
+              <div class="carousel-item " *ngFor="let img of product?.productImage; let i = index"
                 [ngClass]="{'active': viewImage === i}">
                 <img src="{{baseURL+img}}" class="d-block w-100" alt="Product images">
               </div>
@@ -24,7 +24,7 @@
             </div>
             <ol class="carousel-indicators position-relative" >
               <li data-target="#carouselExampleCaptions" class="w-25 h-auto active"
-                *ngFor="let img of product.productImage; let i = index"
+                *ngFor="let img of product?.productImage; let i = index"
                 >
                 <img src="{{baseURL + img}}" (click)="this.viewImage = i " [ngClass]="{'active': img[i] === i}"
                   class="d-block wid-50"
@@ -52,17 +52,16 @@
         <div class="col-lg-7">
           <form class="pl-lg-4">
             <h6 class="text-muted">Jolyecart logistic</h6>
-            <h3 class="mt-0">{{product.productName}} <a href="javascript: void(0);" class="text-muted"><i
+            <h3 class="mt-0">{{product?.productName}} <a href="javascript: void(0);" class="text-muted"><i
                   class="mdi mdi-square-edit-outline ml-2"></i></a> </h3>
-            <p class="mb-1">{{product.createAt}}</p>
+            <p class="mb-1">{{product?.createAt}}</p>
             <div class="mt-3">
-              <h5 *ngIf="product.inStock"><span class="badge badge-success">Instock</span></h5>
-              <h5 *ngIf="!product.inStock"><span class="badge badge-success">Instock</span></h5>
+              <h5 *ngIf="product?.inStock"><span class="badge badge-success">Instock</span></h5>
 
             </div>
             <div class="mt-4">
               <h6>Special price:</h6>
-              <h3>{{product.price}} <del class="text-muted font-weight-normal h5"> <small>$322.53</small></del> <small
+              <h3>{{product?.price}} <del class="text-muted font-weight-normal h5"> <small>$322.53</small></del> <small
                   class="text-success h5">86% off</small></h3>
               <h5><span class="badge badge-success">3.8 <i class="feather icon-star-on"></i></span> 179 ratings and 43
                 reviews</h5>
@@ -154,7 +153,7 @@
         <div class="col-lg-12">
           <div class="mt-4">
             <h6>Description:</h6>
-            <div [innerHTML]="product.discrption">
+            <div [innerHTML]="product?.discrption">
             </div>
           </div>
         </div>

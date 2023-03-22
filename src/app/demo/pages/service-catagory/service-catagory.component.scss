@@ -1,0 +1,18 @@
+.btn{
+  border-radius: 4rem;
+}
+.footer {
+  display: flex !important;
+  align-content: flex-end !important;
+  margin-top: 1rem !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  font-size: 1rem !important;
+}
+#time-picker-wrapper.active{
+
+    z-index: 10000000000000000 !important;
+}
+::ng-deep #toast-container > div {
+    opacity: 1 !important;
+}

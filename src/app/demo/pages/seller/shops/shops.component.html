@@ -1,15 +1,12 @@
 <div class="row">
   <div class="col-sm-12">
     <app-card [hidHeader]="true" cardClass="user-profile-list">
-
       <div class="row align-items-center m-l-0">
         <div class="col-sm-6"></div>
         <div class="col-sm-6 text-right">
           <button class="btn btn-primary  btn-round has-ripple" (click)="modalCustomer.show();clearForm()"><i
               class="feather icon-plus"></i> Add Customer</button>
         </div>
-
-
         <app-ui-modal #modalCustomer>
           <div class="app-modal-header">
             <h5 class="modal-title">Add Seller</h5>
@@ -20,53 +17,70 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Name" formControlName="username">
+                  <input type="text" class="form-control"
+                    [ngClass]="{'is-invalid': !this.seller.controls['username'].valid&&
+                   this.seller.controls['username'].touched}" placeholder="Name" formControlName="username" >
                 </div>
               </div>
               <div class="col-sm-12">
                 <div class="form-group fill">
-                  <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                  <input type="email" class="form-control"
+                    [ngClass]="{'is-invalid': !this.seller.controls['email'].valid&&
+                   this.seller.controls['email'].touched}" placeholder="Email" formControlName="email">
                 </div>
               </div>
               <div class="col-sm-12">
                 <div class="form-group fill">
-                  <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                  <input type="password" class="form-control"
+                    [ngClass]="{'is-invalid': !this.seller.controls['password'].valid&&
+                   this.seller.controls['password'].touched}" placeholder="Password" formControlName="password">
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Phone" formControlName="phone">
+                  <input type="text" class="form-control"
+                    [ngClass]="{'is-invalid': !this.seller.controls['phone'].valid&&
+                   this.seller.controls['phone'].touched}" placeholder="Phone" formControlName="phone">
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Age" formControlName="age">
+                  <input type="text" class="form-control" [ngClass]="{'is-invalid': !this.seller.controls['age'].valid&&
+                   this.seller.controls['age'].touched}" placeholder="Age" formControlName="age">
                 </div>
               </div>
               <div class="col-sm-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="address" formControlName="address">
+                  <input type="text" class="form-control"
+                    [ngClass]="{'is-invalid': !this.seller.controls['address'].valid&&
+                   this.seller.controls['address'].touched}" placeholder="address" formControlName="address">
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="City" formControlName="city">
+                  <input type="text" class="form-control"
+                    [ngClass]="{'is-invalid': !this.seller.controls['city'].valid&&
+                   this.seller.controls['city'].touched}" placeholder="City" formControlName="city">
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="State" formControlName="state">
+                  <input type="text" class="form-control"
+                    [ngClass]="{'is-invalid': !this.seller.controls['state'].valid&&
+                   this.seller.controls['state'].touched}" placeholder="State" formControlName="state">
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Zip" formControlName="zip">
+                  <input type="text" class="form-control" [ngClass]="{'is-invalid': !this.seller.controls['zip'].valid&&
+                   this.seller.controls['zip'].touched}" placeholder="Zip" formControlName="zip">
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <select class="form-control" formControlName="zender">
-                    <option value="">Select Sex</option>
+                  <select class="form-control" [ngClass]="{'is-invalid': !this.seller.controls['zender'].valid&&
+                   this.seller.controls['zender'].touched}" formControlName="zender">
+                    <option value=" " selected > Select Sex</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </select>
@@ -75,18 +89,29 @@
               <div class="col-sm-12">
                 <div class="form-group fill">
                   <label class="floating-label" for="Icon">Profie Image</label>
-                  <input type="file" class="form-control" (change)="fileHendler($event)">
+                  <input type="file" class="form-control"
+                  formControlName="userImage"
+                    [ngClass]="{'is-invalid': !this.seller.controls['userImage'].valid && !file}"
+                    (change)="fileChangeEvent($event)">
+                   
                 </div>
+                 <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                   [aspectRatio]="1 / 1" format="png" (imageCropped)="imageCropped($event)"
+                   (imageLoaded)="imageLoaded($event)"
+                   (cropperReady)="cropperReady()"
+                   (loadImageFailed)="loadImageFailed()"></image-cropper>
               </div>
               <!-- <div class="col-sm-6">
                 <div class="form-group fill">
                   <label class="floating-label" for="Birth">Birth Date</label>
-                  <input type="date" class="form-control" id="Birth" placeholder="123">
+                  <input type="date" class="form-control"  [ngClass]="{'is-invalid': !this.seller.controls['perent'].valid&&
+                   this.seller.controls['perent'].touched}" id="Birth" placeholder="123">
                 </div>
               </div> -->
               <!-- <div class="col-sm-12">
                 <div class="form-group">
-                  <select class="form-control">
+                  <select class="form-control"  [ngClass]="{'is-invalid': !this.seller.controls['perent'].valid&&
+                   this.seller.controls['perent'].touched}">
                     <option value="">Select Blood Group</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
@@ -103,15 +128,15 @@
           </div>
           <div class="app-modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal"
-              (click)="modalCustomer.hide()">Clear</button>
+              (click)="modalCustomer.hide();clearForm()">Clear</button>
             <button type="button" class="btn btn-primary my-3"
               (click)="submit();modalCustomer.hide()">{{id?'Update':'submit'}}</button>
           </div>
         </app-ui-modal>
       </div>
-        <div class="">
-          <input type="text" class="form-control" placeholder="Search..." (input)="Search($event)" autocomplete="off">
-        </div>
+      <div class="">
+        <input type="text" class="form-control"   placeholder="Search..." (input)="Search($event)" autocomplete="off">
+      </div>
       <div class="dt-responsive table-responsive">
         <table datatable class="table table-striped row-border table-hover">
           <thead style="width: 100%;">
@@ -129,7 +154,7 @@
           <tbody>
             <tr *ngFor="let item of tableData">
               <td>
-                <div class="d-inline-block align-middle" routerLink="{{'prodects/'+item._id}}">
+                <div class="d-inline-block align-middle" routerLink="{{'prodects/'+item._id}}" >
                   <img src="{{imageURL + item.userImage}}" alt="user image" class="img-radius align-top m-r-15"
                     style="width:40px;">
                   <div class="d-inline-block">
@@ -138,6 +163,15 @@
                   </div>
                 </div>
               </td>
+              <!-- <td>
+                <div class="input-group-append" ngbDropdown [placement]="'bottom-left'">
+                  <button class="btn btn-light" ngbDropdownToggle type="button">Dropdown</button>
+                  <div ngbDropdownMenu>
+                   <a class="dropdown-item"">Products Management</a>
+                   <a class="dropdown-item" routerLink="{{'service/'+item._id}}">Service Management</a>
+                  </div>
+                </div>
+              </td> -->
               <td>{{item.phone}}</td>
               <td>{{item.age}}</td>
               <td>{{item.state}}</td>
@@ -145,14 +179,13 @@
               <td>{{item.zender}}</td>
               <td>
                 <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="{{item._id}}"
-                    (change)="statusHandel($event)" [checked]="item.satate" >
+                  <input type="checkbox" class="custom-control-input" id="{{item._id}}" (change)="statusHandel($event)"
+                    [checked]="item.satate">
                   <label class="custom-control-label" for="{{item._id}}"></label>
                 </div>
               </td>
               <td>
-                <span class="badge "
-                  ngClass="{{item.satate ? 'badge-light-success' :'badge-light-danger'}}
+                <span class="badge " ngClass="{{item.satate ? 'badge-light-success' :'badge-light-danger'}}
                   ">{{item.satate ? 'Active' :'Disabled'}} </span>
                 <div class="overlay-edit">
                   <button type="button" class="btn btn-icon btn-success" (click)="modalCustomer.show();update(item)"><i

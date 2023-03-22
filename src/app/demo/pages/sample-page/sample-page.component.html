@@ -1,176 +1,100 @@
-<div class="row">
-  <div class="col-sm-12">
-    <app-card [hidHeader]="false" cardClass="user-profile-list">
-      <div class="dt-responsive table-responsive">
-        <table datatable class="table table-striped row-border table-hover">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Office</th>
-              <th>Age</th>
-              <th>Start date</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="d-inline-block align-middle">
-                  <img src="assets/images/user/avatar-1.jpg" alt="user image" class="img-radius align-top m-r-15"
-                    style="width:40px;">
-                  <div class="d-inline-block">
-                    <h6 class="m-b-0">Quinn Flynn</h6>
-                    <p class="m-b-0">Qf@domain.com</p>
-                  </div>
-                </div>
-              </td>
-              <td>Support Lead</td>
-              <td>Edinburgh</td>
-              <td>61</td>
-              <td>2011/04/25</td>
-              <td>
-                <span class="badge badge-light-success">Active</span>
-                <div class="overlay-edit">
-                  <button type="button" class="btn btn-icon btn-success"><i
-                      class="feather icon-check-circle"></i></button>
-                  <button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-inline-block align-middle">
-                  <img src="assets/images/user/avatar-2.jpg" alt="user image" class="img-radius align-top m-r-15"
-                    style="width:40px;">
-                  <div class="d-inline-block">
-                    <h6 class="m-b-0">Garrett Winters</h6>
-                    <p class="m-b-0">gw@domain.com</p>
-                  </div>
-                </div>
-              </td>
-              <td>Accountant</td>
-              <td>Tokyo</td>
-              <td>63</td>
-              <td>2011/07/25</td>
-              <td>
-                <span class="badge badge-light-danger">Disabled</span>
-                <div class="overlay-edit">
-                  <button type="button" class="btn btn-icon btn-success"><i
-                      class="feather icon-check-circle"></i></button>
-                  <button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-inline-block align-middle">
-                  <img src="assets/images/user/avatar-3.jpg" alt="user image" class="img-radius align-top m-r-15"
-                    style="width:40px;">
-                  <div class="d-inline-block">
-                    <h6 class="m-b-0">Ashton Cox</h6>
-                    <p class="m-b-0">ac@domain.com</p>
-                  </div>
-                </div>
-              </td>
-              <td>Junior Technical Author</td>
-              <td>San Francisco</td>
-              <td>66</td>
-              <td>2009/01/12</td>
-              <td>
-                <span class="badge badge-light-danger">Disabled</span>
-                <div class="overlay-edit">
-                  <button type="button" class="btn btn-icon btn-success"><i
-                      class="feather icon-check-circle"></i></button>
-                  <button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-inline-block align-middle">
-                  <img src="assets/images/user/avatar-4.jpg" alt="user image" class="img-radius align-top m-r-15"
-                    style="width:40px;">
-                  <div class="d-inline-block">
-                    <h6 class="m-b-0">Cedric Kelly</h6>
-                    <p class="m-b-0">ck@domain.com</p>
-                  </div>
-                </div>
-              </td>
-              <td>Senior Javascript Developer</td>
-              <td>Edinburgh</td>
-              <td>22</td>
-              <td>2012/03/29</td>
-              <td>
-                <span class="badge badge-light-success">Active</span>
-                <div class="overlay-edit">
-                  <button type="button" class="btn btn-icon btn-success"><i
-                      class="feather icon-check-circle"></i></button>
-                  <button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-inline-block align-middle">
-                  <img src="assets/images/user/avatar-4.jpg" alt="user image" class="img-radius align-top m-r-15"
-                    style="width:40px;">
-                  <div class="d-inline-block">
-                    <h6 class="m-b-0">Airi Satou</h6>
-                    <p class="m-b-0">as@domain.com</p>
-                  </div>
-                </div>
-              </td>
-              <td>Accountant</td>
-              <td>Tokyo</td>
-              <td>33</td>
-              <td>2008/11/28</td>
-              <td>
-                <span class="badge badge-light-success">Active</span>
-                <div class="overlay-edit">
-                  <button type="button" class="btn btn-icon btn-success"><i
-                      class="feather icon-check-circle"></i></button>
-                  <button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-inline-block align-middle">
-                  <img src="assets/images/user/avatar-5.jpg" alt="user image" class="img-radius align-top m-r-15"
-                    style="width:40px;">
-                  <div class="d-inline-block">
-                    <h6 class="m-b-0">Brielle Williamson</h6>
-                    <p class="m-b-0">bw@domain.com</p>
-                  </div>
-                </div>
-              </td>
-              <td>Integration Specialist</td>
-              <td>New York</td>
-              <td>61</td>
-              <td>2012/12/02</td>
-              <td>
-                <span class="badge badge-light-danger">Disabled</span>
-                <div class="overlay-edit">
-                  <button type="button" class="btn btn-icon btn-success"><i
-                      class="feather icon-check-circle"></i></button>
-                  <button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Office</th>
-              <th>Age</th>
-              <th>Start date</th>
-              <th>Status</th>
-            </tr>
-          </tfoot>
-        </table>
+<app-card [hidHeader]="true" cardClass="user-profile-list">
+  <div class="container p-5">
+    <div class="row ">
+      <div class="col-xl-3 col-md-6 mx-auto p-3"  >
+        <app-card [hidHeader]="true" cardClass=" order-card">
+          <h3>{{order?order:"N/A"?order:"N/A"}}</h3>
+          <p class="text-muted"> Total Orders</p>
+          <!-- <app-apex-chart chartID="seo-chart-1" [chartConfig]="this.seoChartData1"></app-apex-chart> -->
+          <i class="card-icon feather icon-shopping-cart float-end text-muted text-info"></i>
+        </app-card>
       </div>
-    </app-card>
+      <div class="col-xl-3 col-md-6 mx-auto p-3">
+        <app-card [hidHeader]="true" cardClass=" order-card">
+          <h3>{{selse?selse:"N/A"}}</h3>
+          <p class="text-muted">Total Sales</p>
+          <i class="card-icon feather icon-bar-chart float-end text-muted text-success"></i>
+          <!-- <app-apex-chart chartID="seo-chart-2" [chartConfig]="this.seoChartData2"></app-apex-chart> -->
+        </app-card>
+      </div>
+      <div class="col-xl-3 col-md-6 mx-auto p-3">
+        <app-card [hidHeader]="true" cardClass=" order-card">
+          <h3>{{products?products:"N/A"}}</h3>
+          <p class="text-muted">Total Products</p>
+          <i class="card-icon feather icon-package float-end text-muted   text-primary"></i>
+
+          <!-- <app-apex-chart chartID="seo-chart-3" [chartConfig]="this.seoChartData3"></app-apex-chart> -->
+        </app-card>
+      </div>
+      <div class="col-xl-3 col-md-6 mx-auto p-3">
+        <app-card [hidHeader]="true" cardClass=" order-card">
+          <h3>{{services?services:"N/A"}}</h3>
+          <p class="text-muted">Total Service</p>
+          <i class="card-icon feather icon-settings float-end text-muted   text-warning"></i>
+          <!-- <app-apex-chart chartID="seo-chart-3" [chartConfig]="this.seoChartData3"></app-apex-chart> -->
+        </app-card>
+      </div>
+      <div class="col-md-6 col-xl-4 ">
+        <app-card [hidHeader]="true" cardClass="bg-c-yellow order-card " >
+          <h6 class="text-white">Revenue</h6>
+          <h2 class="text-white mb-2">{{ convert(revenyu)?convert(revenyu):"N/A"}}</h2>
+          <i class="card-icon feather icon-filter "></i>
+          <br>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-xl-4">
+        <app-card [hidHeader]="true" cardClass="bg-c-blue order-card">
+          <h6 class="text-white">Total Order Cancel</h6>
+          <h2 class="text-white">{{cancelproduct?cancelproduct:"N/A"}}</h2>
+          <br>
+          <i class="card-icon feather icon-x"></i>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-xl-4">
+        <app-card [hidHeader]="true" cardClass="bg-c-green order-card">
+          <h6 class="text-white">Total Service Book</h6>
+          <h2 class="text-white">{{totalservicebook?totalservicebook:"N/A"}}</h2>
+          <br>
+
+          <i class="card-icon feather icon-radio"></i>
+        </app-card>
+      </div>
+    </div>
+  </div>
+  <div class="row" >
+    
+    
+
+      <div class="table-responsive">
+        <table datatable id="report-table" class="table mb-0">
+          <thead class="thead-light">
+            <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of feedback.slice(0, 5);let i = index " >
+            <td class="align-middle">
+              {{i+1}}
+            </td>
+            <td class="align-middle">
+              {{item.name}}
+            </td>
+            <td class="align-middle">
+              {{item.email}}
+            </td> <td class="align-middle">
+              {{item.phone}}
+            </td>
+            <td class="align-middle">
+              {{item.message}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
   </div>
 </div>
+</app-card>

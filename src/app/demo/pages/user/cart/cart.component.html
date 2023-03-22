@@ -14,14 +14,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let item of cart" >
               <td>
                 <div class="d-inline-block align-middle">
-                  <img src="assets/images/user/avatar-1.jpg" alt="user image" class="img-radius align-top m-r-15"
+                  <img src="{{ imageUrl+  item.product.productImage[0]}} " alt="user image"
+                    class="img-radius align-top m-r-15"
                     style="width:40px;">
                   <div class="d-inline-block">
-                    <h6 class="m-b-0">Quinn Flynn</h6>
-                    <p class="m-b-0">Qf@domain.com</p>
+                    <h6 class="m-b-0">{{item.product.productName}}</h6>
+                    <p class="m-b-0">{{item.product.productInfo  | srink }} </p>
                   </div>
                 </div>
               </td>

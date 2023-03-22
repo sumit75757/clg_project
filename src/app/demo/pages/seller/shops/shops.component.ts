@@ -5,9 +5,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import 'sweetalert2/src/sweetalert2.scss';
 
 import Swal from 'sweetalert2';
-import { environment } from "../../../../../environments/environment";
+import { environment } from 'src/environments/environment.prod'
 import { ApiService } from 'src/app/service/api/api.service';
 import { ToastrService } from 'ngx-toastr';
+import { base64ToFile, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-shops',
@@ -20,7 +21,12 @@ export class ShopsComponent implements OnInit {
   file: any;
   id: any;
   serch: any;
-  constructor(private toastr: ToastrService, private fb: FormBuilder, private api: ApiService, public spiner: NgxSpinnerService, private route: Router, private activeRoute: ActivatedRoute) { }
+  constructor(private toastr: ToastrService, private fb: FormBuilder, private api: ApiService, public spiner: NgxSpinnerService, private route: Router, private activeRoute: ActivatedRoute) {
+    let user =  JSON.parse(localStorage.getItem('userData'))
+    if (user.character == 'seller' && user) {
+      route.navigate(['seller/prodects/' + user._id])
+    }
+   }
   seller: FormGroup;
 
   ngOnInit(): void {
@@ -36,7 +42,7 @@ export class ShopsComponent implements OnInit {
       age: new FormControl("", [Validators.required]),
       zender: new FormControl("", [Validators.required]),
       character: new FormControl("", [Validators.required]),
-      userImage: new FormControl(this.file),
+      userImage: new FormControl("", [Validators.required]),
 
     })
     this.getseller()
@@ -45,6 +51,56 @@ export class ShopsComponent implements OnInit {
   limit = 10
   next = 0
   count: any;
+
+  imageChangedEvent: any ;
+  croppedImage: any ;
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+    console.log(event);
+    
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    const fileToReturn = this.base64ToFile(
+      event.base64,
+      this.imageChangedEvent.target.files[0].name,
+    )
+    console.log(fileToReturn);
+    this.seller.controls['userImage'].setValue(fileToReturn)
+
+  }
+
+
+  base64ToFile(data, filename) {
+
+    const arr = data.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    let u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+  }
+ 
+  imageLoaded(image: LoadedImage) {
+    // show cropper
+    // console.log(image);
+    
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
+  }
+  fileHendler(e: any) {
+    this.imageChangedEvent = e;
+  }
   previeus() {
     let l: any = this.limit;
     let s: any = this.skip;
@@ -73,12 +129,7 @@ export class ShopsComponent implements OnInit {
       return this.next + 10
     }
   }
-  fileHendler(e: any) {
-    debugger
-    let file = e.target.files[0]
-    this.file = file
-    this.seller.controls['userImage'].setValue(this.file)
-  }
+  
 
   Search(e) {
     this.serch = e.target.value
@@ -116,17 +167,27 @@ export class ShopsComponent implements OnInit {
   update(item) {
     this.id = item._id
     if (this.id) {
-      this.seller.patchValue(item)
+      this.seller.setValue({
+        username: item.username,
+        email: item.email,
+        password: '',
+        phone: item.phone,
+        address: item.address,
+        city: item.city,
+        state: item.state,
+        zip: item.zip,
+        age: item.age,
+        zender: item.zender,
+        character: item.character,
+        userImage: item.userImage
+      })
       this.seller.controls['email'].disable()
       this.seller.controls['password'].disable()
-      console.log(item);
     }
   }
 
   clearForm() {
-
     this.id = null
-    console.log(this.id);
     this.seller.reset()
     this.seller.controls['email'].enable()
     this.seller.controls['password'].enable()
@@ -149,7 +210,7 @@ export class ShopsComponent implements OnInit {
     formdata.set('state', this.seller.controls['state'].value ? this.seller.controls['state'].value : '');
     formdata.set('zender', this.seller.controls['zender'].value ? this.seller.controls['zender'].value : '');
     formdata.set('character', 'seller');
-    formdata.append('userImage', this.file);
+    formdata.append('userImage', this.seller.controls['userImage'].value ? this.seller.controls['userImage'].value : '');
     if (this.id) {
       formdata.delete('password');
       this.api.updateSeller(formdata, this.id).subscribe((res: any) => {

@@ -1,0 +1,24 @@
+.btn{
+  border-radius: 4rem;
+}
+.footer {
+  display: flex !important;
+  align-content: flex-end !important;
+  margin-top: 1rem !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  font-size: 1rem !important;
+}
+#time-picker-wrapper.active[_ngcontent-kjq-c135]{
+    z-index: 10000000000000000 !important;
+}
+
+::ng-deep #toast-container > div {
+    opacity: 1 !important;
+}
+
+.img-radiuse{
+  border-radius:50% ;
+  max-width: 60px;
+  height: 60px;
+}

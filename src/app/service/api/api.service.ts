@@ -17,6 +17,11 @@ export class ApiService {
     'Content-Type': 'application/x-www-form-urlencoded'
   });
 
+  getState() {
+    return this.http.get('../../../assets/state.json')
+
+  }
+
   getSeller(skip, limit, serch) {
     serch = serch ? serch : '';
     console.log(serch);
@@ -40,7 +45,6 @@ export class ApiService {
   getproduct(id: any, skip, limit, serch) {
     serch = serch ? serch : '';
     console.log(serch);
-
     return this.http.get(this.baseUrl + 'api/seller/product/' + id + '?skip=' + skip + "&limit=" + limit + "&serch=" + serch ,{ headers: this.header })
   }
   getproductbyId(id: any) {
@@ -107,4 +111,86 @@ export class ApiService {
     return this.http.get(this.baseUrl + 'api/users?skip=' + skip + "&limit=" + limit + "&serch=" + serch  , { headers: this.header })
   }
 
+
+  // service
+  getservice(id?:any) {
+    if (id) {
+    return this.http.get(this.baseUrl + 'api/seller/product/service/'+id, { headers: this.header })
+      
+    } else {
+      
+    return this.http.get(this.baseUrl + 'api/service/', { headers: this.header })
+    }
+  }
+  addservice(data) {
+    return this.http.post(this.baseUrl + 'api/service/', data, { headers: this.header })
+  }
+  Updatesrvice(data,id) {
+    return this.http.put(this.baseUrl + 'api/service/'+id, data, { headers: this.header })
+  }
+  serviceDelete(id) {
+    return this.http.delete(this.baseUrl + 'api/service/' + id, { headers: this.header })
+  }
+
+
+
+  getServiceCategory() {
+    return this.http.get(this.baseUrl + 'api/servicecat/', { headers: this.header })
+  }
+ postServiceCategory(data) {
+    return this.http.post(this.baseUrl + 'api/servicecat/',data, { headers: this.header })
+  }
+  delteServiceCategory(id) {
+    return this.http.delete(this.baseUrl + 'api/servicecat/' + id, { headers: this.header })
+  }
+  updateServiceCategory(data,id) {
+    return this.http.put(this.baseUrl + 'api/servicecat/' + id, data, { headers: this.header })
+  }
+
+  getUsercart(id) {
+    return this.http.get(this.baseUrl + 'api/cart/' + id, { headers: this.header })
+
+ }
+
+  getOffers(data: any) {
+    return this.http.get(this.baseUrl + 'api/Offers', data)
+  }
+
+  updateOffers(data: any, id: any) {
+    return this.http.put(this.baseUrl + 'api/Offers' + id, data, { headers: this.header })
+  }
+
+  removeOffers(id: any) {
+    return this.http.delete(this.baseUrl + 'api/offers' + id, { headers: this.header })
+  }
+
+  addOffer(data: any) {
+    return this.http.post(this.baseUrl + 'api/offers',data, { headers: this.header })
+
+  }
+  gettotalproduct(id?:any){
+    if (id) {
+    return this.http.get(this.baseUrl + 'api/seller/product/' + id ,{ headers: this.header })
+    }else{
+      return this.http.get(this.baseUrl + 'api/product/', { headers: this.header })
+    }
+  }
+  gettotalorders(id?:any){
+    if (id) {
+      return this.http.get(this.baseUrl + 'api/seller/product/orders/'+id, { headers: this.header })      
+    }else{
+      return this.http.get(this.baseUrl + 'api/orders/', { headers: this.header })
+    }
+  }
+  getbookservice(id?:any){
+    if (id) {
+      return this.http.get(this.baseUrl + 'api/bookapoinment/seller/'+id, { headers: this.header })      
+    }else{
+      return this.http.get(this.baseUrl + 'api/bookapoinment', { headers: this.header })
+    }
+  }
+  getfeedback(){
+    return this.http.get(this.baseUrl + 'api/feeback', { headers: this.header })
+
+  }
 }

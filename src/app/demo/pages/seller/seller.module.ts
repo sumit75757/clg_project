@@ -9,16 +9,24 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ViewComponent } from './view/view.component';
 import { ToastrModule } from 'ngx-toastr';
 import { PipePipe } from "../../../pipe/pipe.pipe";
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { AmazingTimePickerModule } from 'amazing-time-picker';
+import { ImageCropperModule } from 'ngx-image-cropper';
 @NgModule({
 
-  declarations: [SellerComponent, ShopsComponent, ProductsComponent, ViewComponent, PipePipe],
+  declarations: [SellerComponent, ShopsComponent, ProductsComponent , ViewComponent, PipePipe],
   imports: [
     CommonModule,
     SellerRoutingModule,
     SharedModule,
     AngularEditorModule,
     ToastrModule.forRoot(),
+    NgbDropdownModule,
+    NgbDatepickerModule,
+    AmazingTimePickerModule,
+    ImageCropperModule
   ],
-  schemas: [  ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SellerModule { }

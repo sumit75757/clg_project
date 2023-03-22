@@ -2,7 +2,7 @@
   <div class="col-sm-12">
     <app-card [hidHeader]="true" cardClass="card-datatable">
       <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Search..." (input)="Search($event)">
+        <input type="text" class="form-control " placeholder="Search..." (input)="Search($event)">
       </div>
       <div class="row align-items-center m-l-0">
         <div class="col-sm-6"></div>
@@ -22,18 +22,22 @@
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" formControlName="productName" placeholder="Name">
+                    <input type="text" class="form-control" [ngClass]="{'is-invalid': !this.product.controls['productName'].valid&&
+                   this.product.controls['productName'].touched}" formControlName="productName" placeholder="Name">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" formControlName="productInfo"
+                    <input type="text" class="form-control" [ngClass]="{'is-invalid': !this.product.controls['productInfo'].valid&&
+                   this.product.controls['productInfo'].touched}" formControlName="productInfo"
                       placeholder="Small Discrption">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <select class="form-control" formControlName="catogory" (change)="subcat($event)" id="Category">
+                    <select class="form-control" [ngClass]="{'is-invalid': !this.product.controls['catogory'].valid&&
+                   this.product.controls['catogory'].touched}" formControlName="catogory" (change)="subcat($event)"
+                      id="Category">
                       <option value="">Select Category</option>
                       <option *ngFor="let cat of category" value="{{cat.name}}">{{cat.name}}</option>
                     </select>
@@ -41,7 +45,8 @@
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <select class="form-control" formControlName="subCatogory" id="Category">
+                    <select class="form-control" [ngClass]="{'is-invalid': !this.product.controls['subCatogory'].valid&&
+                   this.product.controls['subCatogory'].touched}" formControlName="subCatogory" id="Category">
                       <option value="">Select Category</option>
                       <option *ngFor="let subcat of subcategory" value="{{subcat.catgory}}">{{subcat.catgory}}</option>
                     </select>
@@ -49,12 +54,14 @@
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" formControlName="price" id="Price" placeholder="Price">
+                    <input type="text" class="form-control" [ngClass]="{'is-invalid': !this.product.controls['price'].valid&&
+                   this.product.controls['price'].touched}" formControlName="price" id="Price" placeholder="Price">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" formControlName="delevery" id="Quantity"
+                    <input type="text" class="form-control" [ngClass]="{'is-invalid': !this.product.controls['delevery'].valid&&
+                   this.product.controls['delevery'].touched}" formControlName="delevery" id="Quantity"
                       placeholder="Quantity">
                   </div>
                 </div>
@@ -73,7 +80,8 @@
                 </div>
               </div>
               <div *ngIf="nextpage">
-                <angular-editor placeholder="Enter text here..." formControlName="discrption" [config]="editorConfig">
+                <angular-editor placeholder="Enter text here..." [ngClass]="{'is-invalid': !this.product.controls['discrption'].valid&&
+                   this.product.controls['discrption'].touched}" formControlName="discrption" [config]="editorConfig">
                 </angular-editor>
               </div>
             </form>
@@ -86,6 +94,46 @@
               (click)="addProduct()">{{productId ? 'Update' : 'Submit'}}</button>
           </div>
         </app-ui-modal>
+        <app-ui-modal #modalProductoffer [dialogClass]="'modal-xl'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Add To Offer</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="modalProductoffer.hide();reset()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <form [formGroup]="offerproduct">
+              <div class="row">
+                <div class="col-12">
+                  <img src={{baseURL}}{{offersdata?.productImage[0]}} width="400" height="400" alt="">
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" value="{{this.offersdata?.productName}}" [ngClass]="{'is-invalid': !this.product.controls['prodname']?.valid&&
+                   this.product.controls['prodname']?.touched}" disabled placeholder="prodname">
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control"
+                    [ngClass]="{'is-invalid': !this.product.controls['productid']?.valid&&
+                   this.product.controls['productid']?.touched}" disabled formControlName="productid"
+                    placeholder="productid" value="{{offersdata?._id}}">
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" formControlName="category" [ngClass]="{'is-invalid': !this.product.controls['category']?.valid&&
+                   this.product.controls['category']?.touched}" disabled 
+                    placeholder="category">
+                </div>
+                <div class="col-6">
+                  <input type="number" min="20" max="80" value="20" class="form-control" [ngClass]="{'is-invalid': !this.product.controls['discout']?.valid&&
+                   this.product.controls['discout']?.touched}" formControlName="discout" placeholder="Discount">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+              (click)="modalProductoffer.hide(); offerreset()">Clear</button>
+            <button type="button" class="btn btn-primary" (click)="offersubmt(modalProductoffer)">submit</button>
+          </div>
+        </app-ui-modal>
       </div>
       <div class="table-responsive">
         <table datatable id="report-table" class="table mb-0">
@@ -96,6 +144,8 @@
               <th>Added Date</th>
               <th>Price</th>
               <th>Quantity</th>
+              <th>Show At Home</th>
+              <th>Add Offers</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -127,9 +177,21 @@
               <td class="align-middle">
                 {{item.delevery}}
               </td>
+              <td>
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="{{item._id}}" (change)="statusHandel($event)"
+                    [checked]="item.onhome">
+                  <label class="custom-control-label" for="{{item._id}}"></label>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <button class="btn btn-link" (click)="setdata(item);modalProductoffer.show()"><i
+                      class="feather icon-plus"></i> Add Offer</button>
+                </div>
+              </td>
               <td class="align-middle">
                 <span class="badge badge-success">Active</span>
-
               </td>
 
               <td class="table-action">

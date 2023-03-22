@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardGuard } from './service/auth/auth-guard.guard';
 import { RouteGuardGuard } from './service/route/route-guard.guard';
+import { SellerGuard } from "./service/sellerroute/seller.guard";
 import { AdminComponent } from './theme/layout/admin/admin.component';
 import {AuthComponent} from './theme/layout/auth/auth.component';
+import { SingupComponent } from './theme/layout/singup/singup.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,18 @@ const routes: Routes = [
       {
         path: 'users',
         loadChildren: () => import('./demo/pages/user/user.module').then(module => module.UserModule)
+      },
+      {
+        path: 'services/catogory',
+        loadChildren: () => import('./demo/pages/service-catagory/service-catagory.module').then(module => module.ServiceCatagoryModule)
+      },
+      {
+        path: 'service',
+        loadChildren: () => import('./demo/pages/services/services.module').then(module => module.ServicesModule)
+      },
+      {
+        path: 'offers',
+        loadChildren: () => import('./demo/pages/offers/offers/offers.module').then(module => module.OffersModule)
       }
     ]
   },
@@ -38,8 +52,11 @@ const routes: Routes = [
     path: 'login',
     component: AuthComponent,
     canActivate: [AuthGuardGuard],
-
-
+  },
+  {
+    path: 'singup',
+    component: SingupComponent,
+    canActivate: [AuthGuardGuard],
   }
 ];
 

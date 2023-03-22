@@ -21,3 +21,6 @@ td{
     align-items: center;
     padding: 1.6rem;
 }
+::ng-deep #toast-container > div {
+    opacity: 1 !important;
+}

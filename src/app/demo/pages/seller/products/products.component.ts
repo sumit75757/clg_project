@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment.prod';
 import { ToastrService } from 'ngx-toastr';
 import { PipePipe } from "../../../../pipe/pipe.pipe";
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -18,25 +19,27 @@ export class ProductsComponent implements OnInit {
   baseURL = environment.imageURL
   id: any;
   product: FormGroup;
+  offerproduct: FormGroup;
+
   category: any;
   files: any[];
   subcategory: any;
-  items:any
+  items: any
   editorConfig: AngularEditorConfig = {
-       editable: true,
-      spellcheck: true,
-      height: '600px  ',
-      minHeight: '0',
-      maxHeight: 'auto',
-      width: 'auto',
-      minWidth: '0',
-      translate: 'yes',
-      enableToolbar: true,
-      showToolbar: true,
-      placeholder: 'Enter text here...',
-      defaultParagraphSeparator: '',
-      defaultFontName: '',
-      defaultFontSize: '',
+    editable: true,
+    spellcheck: true,
+    height: '600px  ',
+    minHeight: '0',
+    maxHeight: 'auto',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter text here...',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
     fonts: [
       { class: 'arial', name: 'Arial' },
       { class: 'times-new-roman', name: 'Times New Roman' },
@@ -79,9 +82,12 @@ export class ProductsComponent implements OnInit {
   htmlContent = '';
   productId: any;
   serch: any;
-  constructor(private toastr: ToastrService, private fb: FormBuilder, private api: ApiService, private activeRoute: ActivatedRoute) { }
+  offersdata: any
+  offerfile: File
+  constructor(private toastr: ToastrService, private spinner: NgxSpinnerService, private fb: FormBuilder, private api: ApiService, private activeRoute: ActivatedRoute) { }
 
   @ViewChild('keywords-input') keywordsInput
+
   ngOnInit() {
     this.activeRoute.params.subscribe(params => {
       this.id = params.id
@@ -89,7 +95,6 @@ export class ProductsComponent implements OnInit {
     this.product = this.fb.group({
       productName: new FormControl("", [Validators.required]),
       productInfo: new FormControl("", [Validators.required]),
-      sellerId: new FormControl(this.id, [Validators.required]),
       price: new FormControl("", [Validators.required]),
       catogory: new FormControl("", [Validators.required]),
       inStock: new FormControl("", [Validators.required]),
@@ -97,9 +102,16 @@ export class ProductsComponent implements OnInit {
       delevery: new FormControl("", [Validators.required]),
       discrption: new FormControl("", [Validators.required])
     })
+    this.offerproduct = this.fb.group({
+      offerImage: new FormControl("", [Validators.required]),
+      category: new FormControl("", [Validators.required]),
+      productid: new FormControl("", [Validators.required]),
+      discout: new FormControl("", [Validators.required]),
+    })
     this.getcatogory()
     this.getproducta()
   }
+
   skip = 0
   limit = 10
   nexta = 0
@@ -113,7 +125,6 @@ export class ProductsComponent implements OnInit {
       this.getproducta()
     }
     this.counts()
-
     console.log(this.next);
   }
   nexts() {
@@ -132,6 +143,25 @@ export class ProductsComponent implements OnInit {
       return this.nexta + 10
     }
   }
+
+  setdata(item: any) {
+    console.log(item);
+    this.offersdata = item
+    this.offerproduct.controls['offerImage'].setValue(this.offersdata.productImage[0])
+    this.offerproduct.controls['category'].setValue(this.offersdata.catogory)
+    this.offerproduct.controls['productid'].setValue(this.offersdata._id)
+
+  }
+  offersubmt(model:any) {
+    if (this.offerproduct.valid) {
+      this.api.addOffer(this.offerproduct.value).subscribe(res => {
+        this.toastr.success('offer Add!')
+        console.log(res);
+        model.hide()
+      })
+
+    }
+  }
   getcatogory() {
     this.api.getCatogory().subscribe((res: any) => {
       if (res.response == 'sucsess') {
@@ -141,10 +171,16 @@ export class ProductsComponent implements OnInit {
       }
       if (res.count == 0) {
         this.toastr.error('Catogory Not Found!')
-
       }
     })
 
+  }
+  statusHandel(e: any) {
+    this.api.updateproduct({ sethomepage: e.target.checked }, e.target.id).subscribe(res => {
+      this.toastr.success('Product Update!')
+      this.getproducta()
+      console.log(res);
+    })
   }
 
   Search(e) {
@@ -153,12 +189,17 @@ export class ProductsComponent implements OnInit {
   }
 
   getproducta() {
+    this.spinner.show()
     this.api.getproduct(this.id, this.skip, this.limit, this.serch).subscribe((res: any) => {
       if (this.serch != '' && res.product.length == 0) {
-        this.toastr.error('Search result not found!')
+        this.toastr.error('Search result not found!');
       }
-      this.items = res.product
-      this.count = res.count
+      if (res.product.length == 0) {
+        this.toastr.error(' result not found!');
+      }
+      this.spinner.hide();
+      this.items = res.product;
+      this.count = res.count;
     })
   }
   imageHandel(e) {
@@ -176,6 +217,9 @@ export class ProductsComponent implements OnInit {
   next() {
     this.nextpage = this.nextpage ? false : true
   }
+  offerreset() {
+    this.offerproduct.reset()
+  }
   reset() {
     this.nextpage = false
     this.product.reset()
@@ -185,17 +229,15 @@ export class ProductsComponent implements OnInit {
   update(item) {
     this.productId = item._id
     this.product.patchValue(item)
-
   }
 
-
-
   async addProduct() {
+    debugger
     if (this.product.valid) {
       let formdata = new FormData()
       formdata.set('productName', this.product.controls['productName'].value)
       formdata.set('productInfo', this.product.controls['productInfo'].value)
-      formdata.set('sellerId', this.product.controls['sellerId'].value)
+      formdata.set('sellerId', this.id)
       formdata.set('price', this.product.controls['price'].value)
       formdata.set('catogory', this.product.controls['catogory'].value)
       formdata.set('inStock', this.product.controls['inStock'].value)
@@ -209,7 +251,7 @@ export class ProductsComponent implements OnInit {
         }
       }
       if (this.productId) {
-        this.api.updateproduct(formdata,this.productId).subscribe(res => {
+        this.api.updateproduct(formdata, this.productId).subscribe(res => {
           this.toastr.success('Product Update!')
           this.getproducta()
           console.log(res);

@@ -19,6 +19,7 @@ const routes: Routes = [
     path: "prodects/:id/view/:productId", component: ViewComponent
   }
 
+
 ];
 
 @NgModule({

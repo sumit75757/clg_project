@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/service/api/api.service';
 import { ToastService } from 'src/app/theme/shared/components/toast/toast.service';
 import { environment } from 'src/environments/environment.prod'
@@ -17,7 +18,7 @@ export class CatagoryComponent implements OnInit {
   tableData: any;
   file: any;
   id: any;
-  constructor(public toastEvent: ToastService,private fb: FormBuilder, private api: ApiService, public spiner: NgxSpinnerService, private route: Router, private activeRoute: ActivatedRoute) { }
+  constructor(public toastEvent: ToastService,private fb: FormBuilder, private api: ApiService, public spiner: NgxSpinnerService, private route: Router, private activeRoute: ActivatedRoute , private toster :ToastrService) { }
   catogory: FormGroup;
   subCatogory: FormGroup;
   ngOnInit(): void {
@@ -32,6 +33,7 @@ export class CatagoryComponent implements OnInit {
   }
 
   getcatogory() {
+
     this.clearForm()
     this.spiner.show()
     this.api.getCatogory().subscribe((res: any) => {
@@ -85,9 +87,11 @@ export class CatagoryComponent implements OnInit {
             this.spiner.hide()
             this.getcatogory()
             this.id = ''
-            Swal.fire('Update!', 'catogory Updated!', 'success');
+          this.toster.success('Catogory Updated')
+
           } else {
-            Swal.fire('Error!', 'Somthing Wrong!', 'error');
+          this.toster.success('Somthing Wrong!')
+
           }
           this.id = ''
         })
@@ -98,9 +102,9 @@ export class CatagoryComponent implements OnInit {
           console.log(res);
           this.spiner.hide()
           this.getcatogory()
-          Swal.fire('Create!', 'catogory created!', 'success');
+          this.toster.success('Catogory Created')
         } else {
-          Swal.fire('Error!', 'Somthing Wrong!', 'error');
+          this.toster.success('Somthing Wrong!')
         }
 
       })
@@ -126,9 +130,9 @@ export class CatagoryComponent implements OnInit {
           this.spiner.hide()
           this.getcatogory()
           this.id = ''
-          Swal.fire('Update!', 'Catogory Updated!', 'success');
+          this.toster.success('Catogory Updated!')
         } else {
-          Swal.fire('Error!', 'Somthing Wrong!', 'error');
+          this.toster.success('Somthing Wrong!')
         }
         this.id = ''
       })
@@ -139,9 +143,9 @@ export class CatagoryComponent implements OnInit {
           console.log(res);
           this.spiner.hide()
           this.getcatogory()
-          Swal.fire('Create!', 'Catogory created!', 'success');
+          this.toster.success('Catogory Created')
         } else {
-          Swal.fire('Error!', 'Somthing Wrong!', 'error');
+               this.toster.success('Somthing Wrong!')
         }
 
       })
@@ -171,10 +175,10 @@ export class CatagoryComponent implements OnInit {
       showCancelButton: true
     }).then((willDelete) => {
       if (willDelete.dismiss) {
-        Swal.fire('', 'Somthing Wrong !', 'error');
+        this.toster.success('Somthing Wrong!')
       } else {
         this.api.removeCatogory(id).subscribe(res => {
-          Swal.fire('', '! Catogory has been deleted!', 'success');
+          this.toster.success('Catogory has been deleted!')
           this.getcatogory()
         })
       }
@@ -189,10 +193,10 @@ export class CatagoryComponent implements OnInit {
       showCancelButton: true
     }).then((willDelete) => {
       if (willDelete.dismiss) {
-        Swal.fire('', 'Somthing Wrong !', 'error');
+        this.toster.success('Somthing Wrong!')
       } else {
         this.api.removeSubCatogory(this.id).subscribe(res => {
-          Swal.fire('', '! Catogory has been deleted!', 'success');
+          this.toster.success('Catogory has been deleted!')
           this.getcatogory()
         })
       }

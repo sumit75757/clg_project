@@ -8,7 +8,10 @@ export class ApiService {
   url:any = environment.baseUrl
   constructor(private http: HttpClient) { }
   adminLogin(data:any){
-    return this.http.post(this.url+"api/admin/auth/singin",data)
+    return this.http.post(this.url+"api/auth/singin",data)
+  }
+  addSeller(data:any) {
+    return this.http.post(this.url + 'api/auth/singup', data)
   }
 
 }
