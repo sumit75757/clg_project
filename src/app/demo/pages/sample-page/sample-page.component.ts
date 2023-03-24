@@ -125,14 +125,13 @@ export class SamplePageComponent implements OnInit {
     })
 
   }
-  convert(number:any){
+  convert(number?:any){
     console.log(number);
     let num:string = number.toString()
     if (number == 0) {
-      return 0;
+      return "N/A";
     }
     else {
-      // hundreds
       if (number <= 999) {
 
         return "₹  " + num;
